@@ -47,7 +47,7 @@ class LavemsController extends Controller
 
             return redirect()->back()->withErrors(['There was an error. Please check form again']);
         }
-
+    }
 
      public function getInvoices(){
 
@@ -117,9 +117,7 @@ class LavemsController extends Controller
     // Login controller
     public function login (Request $request){
 
-
-
-         $response = Http::post(config('app.guzzle_test_url').'/api/login/', [
+        $response = Http::post(config('app.guzzle_test_url').'/api/login/', [
             'email' => $request->email,
             'password' => $request->password,
         ]);
@@ -127,57 +125,19 @@ class LavemsController extends Controller
         if ($response->ok()) {
 
             $data = json_decode($response->getBody(), true);
-            // Store the user's username and email in session variables
-            // session(['first_name' => $data['user']['first_name']]);
-            // session(['email' => $data['user']['email']]);
+
 
             // return $data['user']['first_name'];
 session()->put(['user' => $data['user']]);
 return redirect('/Dashboards/Default');
+// return $data;
             // return view('dashboard.sales', $data, $data2);
         } else {
             // return "error";
             return redirect('/')->withErrors(['Invalid credentials']);
         }
 
-    //     $theUrl     = config('app.guzzle_test_url').'/api/login/';
-    //     $response= Http::post($theUrl, [
-    //         'email'=>$request->email,
-    //         'password'=>$request->password
-    //     ]);
-    // //     if ($response['status'] == "success")
-    // //         return view('dashboard.sales', $data);
 
-    // // else
-    // //         return "error";
-
-    //     // return $response['status'];
-
-
-
-    // }
-
-    // $response = $client->post('http://external-login-endpoint.com/login', [
-    //     'form_params' => [
-    //         'username' => 'your-username',
-    //         'password' => 'your-password',
-    //     ]
-    // ]);
-//             $theUrl     = config('app.guzzle_test_url').'/api/login/';
-//         $response= Http::post($theUrl, [
-//             'email'=>$request->email,
-//             'password'=>$request->password
-//         ]);
-//     if ($response->getStatusCode() === 200) {
-//         $userData = json_decode($response->getBody(), true);
-
-//         session()->put('user', $userData);
-// // return $userData;
-// return redirect('/dashboard/sales');
-//         // return view('dashboard.sales', $data);
-//     } else {
-//         return redirect('/login')->withErrors(['Invalid credentials']);
-//     }
     }
 
 }

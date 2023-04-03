@@ -63,7 +63,7 @@
                 </p> --}}
             </div>
             <div>
-                <form class="tooltip-end-bottom"  method="post" action="{{route('login.fire')}}">
+                <form method="post" action="{{route('login.fire')}}">
                     @csrf
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-cs-icon="email"></i>
