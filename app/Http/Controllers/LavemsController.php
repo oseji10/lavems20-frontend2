@@ -24,6 +24,16 @@ class LavemsController extends Controller
 
      }
 
+     public function getInvoices(){
+
+        $theUrl     = config('app.guzzle_test_url').'/api/invoice/';
+        $invoices   = Http ::get($theUrl)->collect();
+        // return $clients;
+        return view('project.invoices', ['invoices' => $invoices]);
+
+
+     }
+
 
      public function showClientForm(){
 
