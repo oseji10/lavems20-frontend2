@@ -223,3 +223,7 @@ Route::get('/client-form', [LavemsController::class, 'showClientForm'])->name('s
 Route::post('/add-client', [LavemsController::class, 'addClient'])->name('client.add');
 
 Route::post('login-action', [LavemsController::class, 'login'])->name('login.fire');
+
+
+Route::get('/invoices', [LavemsController::class, 'getInvoices']);
+Route::post('search-client', [LavemsController::class, 'searchClient']);

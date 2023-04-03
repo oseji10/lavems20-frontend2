@@ -235,7 +235,7 @@
                 </ul>
             </li>
 
-            <li>
+            {{-- <li>
                 <a href="#apps" data-href="/Apps">
                     <i data-cs-icon="screen" class="icon" data-cs-size="18"></i>
                     <span class="label">Apps</span>
@@ -859,7 +859,7 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> --}}
                         </ul>
                     </li>
                 </ul>

@@ -20,9 +20,34 @@ class LavemsController extends Controller
         $clients   = Http ::get($theUrl)->collect();
         // return $clients;
         return view('project.clients', ['clients' => $clients]);
-
-
      }
+
+    //  public function searchClient(Request $request, $id){
+    //     $theUrl = config('app.guzzle_test_url'.'api/search-client/'.$request->$id);
+    //     $client = Http :: get($theUrl)->collect();
+    //     return $client;
+    //  }
+
+
+    public function searchClient(Request $request){
+        $theUrl     = config('app.guzzle_test_url').'/api/search-client/';
+        $response= Http::post($theUrl, [
+            'id'=>$request->query,
+
+            // 'registered_by'=>$request->registered_by
+        ]);
+        // return $response;
+
+        if ($response->ok()) {
+            // return back()->withInput();
+            return redirect()->back()->with('success', 'Client Successfully captured');
+        // return redirect()->back()->success(['Successfully captured']);
+
+        } else {
+
+            return redirect()->back()->withErrors(['There was an error. Please check form again']);
+        }
+
 
      public function getInvoices(){
 
