@@ -19,7 +19,7 @@
 @endsection
 
 @section('content_left')
-    <div class="min-h-100 d-flex align-items-center">
+    {{-- <div class="min-h-100 d-flex align-items-center">
         <div class="w-100 w-lg-75 w-xxl-50">
             <div>
                 <div class="mb-5">
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 @endsection
 
 @section('content_right')
@@ -45,20 +45,22 @@
         <div class="sw-lg-50 px-5">
             <div class="sh-11">
                 <a href="{{ url('/') }}">
-                    <div class="logo-default"></div>
+
                 </a>
             </div>
+        {{-- </div></div> --}}
             <div class="mb-5">
                 <h2 class="cta-1 mb-0 text-primary">Welcome,</h2>
-                <h2 class="cta-1 text-primary">let's get started!</h2>
+                <h2 class="cta-1 text-primary">To The LAVEMS New Portal</h2>
+                <img src="/img/lavems.jpeg" width="50%" />
             </div>
             <div class="mb-5">
                 <p class="h6">Please use your credentials to login.</p>
-                <p class="h6">
+                {{-- <p class="h6">
                     If you are not a member, please
                     <a href="{{ url('/Pages/Authentication/Register') }}">register</a>
                     .
-                </p>
+                </p> --}}
             </div>
             <div>
                 <form class="tooltip-end-bottom"  method="post" action="{{route('login.fire')}}">
