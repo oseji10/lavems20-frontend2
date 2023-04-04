@@ -97,7 +97,7 @@
                             </table>
 <br/>
 
-                            <form method="POST" action="/submit-form">
+                            <form method="POST" action="{{route('invoice.store')}}">
                                 @csrf
 
                                 <div id="item-container">
