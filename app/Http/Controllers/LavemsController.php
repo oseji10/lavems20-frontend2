@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use PDF;
+use Illuminate\Http\Client\RequestException;
 
 class LavemsController extends Controller
 {
@@ -126,29 +127,25 @@ class LavemsController extends Controller
 
 
     // Login controller
-    public function login (Request $request){
+    public function login(Request $request)
+    {
+        try {
+            $response = Http::post(config('app.guzzle_test_url').'/api/login/', [
+                'email' => $request->email,
+                'password' => $request->password,
+            ]);
 
-        $response = Http::post(config('app.guzzle_test_url').'/api/login/', [
-            'email' => $request->email,
-            'password' => $request->password,
-        ]);
-
-        if ($response->ok()) {
-
-            $data = json_decode($response->getBody(), true);
-
-
-            // return $data['user']['first_name'];
-session()->put(['user' => $data['user']]);
-return redirect('/Dashboards/Default');
-// return $data;
-            // return view('dashboard.sales', $data, $data2);
-        } else {
-            return "error";
-            // return redirect('/')->withErrors(['Invalid credentials']);
+            if ($response->ok()) {
+                $data = json_decode($response->getBody(), true);
+                session()->put(['user' => $data['user']]);
+                return redirect('/Dashboards/Default');
+            } else {
+                return "error";
+            }
+        } catch (RequestException $e) {
+            // Handle request exception
+            return redirect('/')->withErrors(['Invalid credentials']);
         }
-
-
     }
 
 }
