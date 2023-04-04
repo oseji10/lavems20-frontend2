@@ -52,7 +52,7 @@
             <div class="mb-5">
                 <h2 class="cta-1 mb-0 text-primary">Welcome,</h2>
                 <h2 class="cta-1 text-primary">To The LAVEMS New Portal</h2>
-                <img src="{{ asset('/img/lavems.JPG') }}" width="50%" />
+                {{-- <img src="{{ asset('/img/lavems.JPG') }}" width="50%" /> --}}
             </div>
             <div class="mb-5">
                 <p class="h6">Please use your credentials to login.</p>
