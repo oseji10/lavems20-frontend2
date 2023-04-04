@@ -99,6 +99,7 @@
                                         <th scope="col">Client ID</th>
                                         <th scope="col">Client Name</th>
                                         <th scope="col">Email</th>
+                                        <th scope="col">Total Cost</th>
                                         <th scope="col">Invoiced By</th>
                                         <th scope="col">Invoice Date</th>
                                         <th></th>
@@ -116,9 +117,10 @@
                                         <td>{{$data['client_id'] ?? null}}</td>
                                         <td>{{$data['name'] ?? null}}</td>
                                         <td>{{$data['email'] ?? null}}</td>
+                                        <td>&#8358;{{ number_format($data['total'] ?? null, 2) }}</td>
                                         <td>{{$data['created_binvoiced_byy'] ?? null}}</td>
                                         <td>{{ Carbon\Carbon::parse($data['created_at'])->format('D, d-m-Y ') }}</td>
-                                        <td><a href="">Edit</a></td>
+                                        <td><a href="">View</a>&nbsp;<a href="">Email</a>&nbsp;<a href="">Edit</a></td>
 
                                     </tr>
                                     @endforeach
