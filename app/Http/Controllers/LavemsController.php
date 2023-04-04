@@ -164,7 +164,7 @@ class LavemsController extends Controller
                 return redirect('/Dashboards/Default');
     } else {
         $data = json_decode($response->getBody(), true);
-                session()->put(['user' => $data['user']]);
+                // session()->put(['user' => $data['user']]);
                 return redirect('/Dashboards/Default');
     }
 }
