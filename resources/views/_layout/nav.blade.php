@@ -209,6 +209,13 @@
                             <span class="label">See All Clients</span>
                         </a>
                     </li>
+
+                    <li>
+                        <a href="/clients">
+                            <span class="label">Search Clients</span>
+                        </a>
+                    </li>
+
                     <li>
                         <a href="/client-form">
                             <span class="label">Add Client</span>
@@ -219,7 +226,7 @@
 
             <li>
                 <a href="#invoices" data-href="invoices">
-                    <i data-cs-icon="user" class="icon" data-cs-size="18"></i>
+                    <i data-cs-icon="note" class="icon" data-cs-size="18"></i>
                     <span class="label">Invoice Management</span>
                 </a>
                 <ul id="invoices">
@@ -235,6 +242,92 @@
                     </li>
                 </ul>
             </li>
+
+
+            <li>
+                <a href="#payments" data-href="payments">
+                    <i data-cs-icon="money" class="icon" data-cs-size="18"></i>
+                    <span class="label">Payment Management</span>
+                </a>
+                <ul id="payments">
+                    <li>
+                        <a href="/payments">
+                            <span class="label">See All Payments</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/add-payment">
+                            <span class="label">Process Payment</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/generate-receipt">
+                            <span class="label">Issue Receipt</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a href="#reports" data-href="reports">
+                    <i data-cs-icon="book" class="icon" data-cs-size="18"></i>
+                    <span class="label">Reports</span>
+                </a>
+                <ul id="reports">
+                    <li>
+                        <a href="/reports">
+                            <span class="label">Payment Schedule</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/add-invoice">
+                            <span class="label">Payment Schedule To Bank</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/add-invoice">
+                            <span class="label">Commissions Received</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/add-invoice">
+                            <span class="label">Processed payments</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/add-invoice">
+                            <span class="label">View Proformas Issued</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+
+            <li>
+                <a href="#settings" data-href="settings">
+                    <i data-cs-icon="gear" class="icon" data-cs-size="18"></i>
+                    <span class="label">Settings</span>
+                </a>
+                <ul id="settings">
+                    <li>
+                        <a href="/edis">
+                            <span class="label">Manage EDIs</span>
+                        </a>
+                    </li>
+                    {{-- <li>
+                        <a href="/add-invoice">
+                            <span class="label">Add Invoice</span>
+                        </a>
+                    </li> --}}
+                </ul>
+            </li>
+
+
 
             {{-- <li>
                 <a href="#apps" data-href="/Apps">
