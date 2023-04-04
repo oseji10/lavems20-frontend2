@@ -22,31 +22,14 @@ class LavemsController extends Controller
         return view('project.clients', ['clients' => $clients]);
      }
 
-    //  public function searchClient(Request $request, $id){
-    //     $theUrl = config('app.guzzle_test_url'.'api/search-client/'.$request->$id);
-    //     $client = Http :: get($theUrl)->collect();
-    //     return $client;
-    //  }
-
-
     public function searchClient(Request $request){
-        $theUrl     = config('app.guzzle_test_url').'/api/search-client/';
-        $response= Http::post($theUrl, [
-            'id'=>$request->query,
 
-            // 'registered_by'=>$request->registered_by
-        ]);
+        $theUrl     = config('app.guzzle_test_url').'/api/search-client/'.$request->id;
+        $response   = Http ::get($theUrl)->collect();
         // return $response;
+        return view('project.add-invoice', ['clients' => $response]);
 
-        if ($response->ok()) {
-            // return back()->withInput();
-            return redirect()->back()->with('success', 'Client Successfully captured');
-        // return redirect()->back()->success(['Successfully captured']);
 
-        } else {
-
-            return redirect()->back()->withErrors(['There was an error. Please check form again']);
-        }
     }
 
      public function getInvoices(){
@@ -55,10 +38,38 @@ class LavemsController extends Controller
         $invoices   = Http ::get($theUrl)->collect();
         // return $clients;
         return view('project.invoices', ['invoices' => $invoices]);
+    }
 
+    public function storeInvoice(Request $request){
+        {
+            // Validate the form data
+            $validatedData = $request->validate([
+                'equipment_serial_numbers.*' => 'required',
+                'equipments.*' => 'required',
+                'quantities.*' => 'required',
+            ]);
 
-     }
+            // Create an array to hold the items and quantities
+            $items = [];
 
+            // Loop through the items and quantities and add them to the array
+            foreach ($validatedData['items'] as $key => $item) {
+                $quantity = $validatedData['quantities'][$key];
+                $items[] = [
+                    'equipment_serial_numbers' => $equipment_serial_number,
+                    'equipments' => $equipment,
+                    'quantity' => $quantity,
+                ];
+            }
+
+            // Submit the data to the external API
+            // $response = Http::post('https://example.com/api/data', $data);
+            $response = Http::post(config('app.guzzle_test_url').'/api/client/', $items);
+
+            // Redirect the user back to the form with a success message
+            return redirect('/form')->with('success', 'Form submitted successfully!');
+        }
+    }
 
      public function showClientForm(){
 

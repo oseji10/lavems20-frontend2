@@ -73,11 +73,12 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form method="post" action="{{url('query-client')}}">
-                        <input class="form-control" type="text" placeholder="Enter Phone Number or Email" name="query" required/>
+                        <form method="post" action="{{url('search-client')}}">
+                            @csrf
+                        <input class="form-control" type="text" placeholder="Enter Phone Number or Email" name="id" required/>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary">Search Client</button>
+                        <button type="submit" class="btn btn-primary">Search Client</button>
                         {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
                     </div>
                 </form>
@@ -94,11 +95,12 @@
                                     <thead>
                                     <tr>
                                         <th scope="col">#</th>
+                                        <th scope="col">Invoice Number</th>
                                         <th scope="col">Client ID</th>
                                         <th scope="col">Client Name</th>
-                                        <th scope="col">Phone</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Registration Date</th>
+                                        <th scope="col">Invoiced By</th>
+                                        <th scope="col">Invoice Date</th>
                                         <th></th>
                                     </tr>
                                     </thead>
@@ -110,10 +112,11 @@
 
 
                                         <th scope="row"><?php echo $i++; ?></th>
+                                        <td>{{$data['invoice_number'] ?? null}}</td>
                                         <td>{{$data['client_id'] ?? null}}</td>
-                                        <td>{{$data['invoice_id'] ?? null}}</td>
-                                        <td>{{$data['cost'] ?? null}}</td>
-                                        <td>{{$data['invoiced_by'] ?? null}}</td>
+                                        <td>{{$data['name'] ?? null}}</td>
+                                        <td>{{$data['email'] ?? null}}</td>
+                                        <td>{{$data['created_binvoiced_byy'] ?? null}}</td>
                                         <td>{{ Carbon\Carbon::parse($data['created_at'])->format('D, d-m-Y ') }}</td>
                                         <td><a href="">Edit</a></td>
 

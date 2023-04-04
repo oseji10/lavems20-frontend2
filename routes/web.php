@@ -226,7 +226,8 @@ Route::post('login-action', [LavemsController::class, 'login'])->name('login.fir
 
 
 Route::get('/invoices', [LavemsController::class, 'getInvoices']);
-Route::post('search-client', [LavemsController::class, 'searchClient']);
+Route::post('/invoice', [LavemsController::class, 'storeInvoice'])->name('invoice.store');
+Route::post('search-client', [LavemsController::class, 'searchClient'])->name('query-client');
 
 
 Route::get('/create-symlink', function (){
