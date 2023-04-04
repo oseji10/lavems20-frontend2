@@ -152,7 +152,7 @@ class LavemsController extends Controller
 {
     $response = Http::withHeaders([
         'X-CSRF-TOKEN' => $request->session()->token(),
-    ])->post('http://localhost:8001/api/login', [
+    ])->post(config('app.guzzle_test_url').'/api/login/', [
         'email' => $request->email,
         'password' => $request->password,
     ]);
