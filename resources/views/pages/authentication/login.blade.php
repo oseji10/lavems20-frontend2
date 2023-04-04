@@ -8,6 +8,7 @@
 ])
 @section('css')
 @endsection
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('js_vendor')
     <script src="{{ asset('/js/vendor/jquery.validate/jquery.validate.min.js') }}"></script>
@@ -65,7 +66,7 @@
             <div>
                 <form method="POST" action="{{route('login.fire')}}">
                     @csrf
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                    {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> --}}
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-cs-icon="email"></i>
                         <input class="form-control" placeholder="Email" name="email"/>

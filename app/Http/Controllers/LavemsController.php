@@ -155,6 +155,7 @@ class LavemsController extends Controller
     ])->post(config('app.guzzle_test_url').'/api/login/', [
         'email' => $request->email,
         'password' => $request->password,
+        // $csrf_token = csrf_token();
     ]);
 
     if ($response->ok()) {
