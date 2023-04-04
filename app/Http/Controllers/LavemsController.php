@@ -144,8 +144,8 @@ return redirect('/Dashboards/Default');
 // return $data;
             // return view('dashboard.sales', $data, $data2);
         } else {
-            // return "error";
-            return redirect('/')->withErrors(['Invalid credentials']);
+            return "error";
+            // return redirect('/')->withErrors(['Invalid credentials']);
         }
 
 
