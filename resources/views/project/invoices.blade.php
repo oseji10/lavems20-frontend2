@@ -115,7 +115,7 @@
                                         <th scope="row"><?php echo $i++; ?></th>
                                         <td>{{$data['invoice_number'] ?? null}}</td>
                                         <td>{{$data['client_id'] ?? null}}</td>
-                                        <td>{{$data['name'] ?? null}}</td>
+                                        <td style="text-transform:uppercase">{{$data['name'] ?? null}}</td>
                                         <td>{{$data['email'] ?? null}}</td>
                                         <td>&#8358;{{ number_format($data['total'] ?? null, 2) }}</td>
                                         <td>{{$data['created_binvoiced_byy'] ?? null}}</td>
