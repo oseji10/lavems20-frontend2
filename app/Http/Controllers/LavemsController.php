@@ -127,26 +127,42 @@ class LavemsController extends Controller
 
 
     // Login controller
-    public function login(Request $request)
-    {
-        try {
-            $response = Http::post(config('app.guzzle_test_url').'/api/login/', [
-                'email' => $request->email,
-                'password' => $request->password,
-            ]);
+    // public function login(Request $request)
+    // {
+    //     try {
+    //         $response = Http::post(config('app.guzzle_test_url').'/api/login/', [
+    //             'email' => $request->email,
+    //             'password' => $request->password,
+    //         ]);
 
-            if ($response->ok()) {
-                $data = json_decode($response->getBody(), true);
-                session()->put(['user' => $data['user']]);
-                return redirect('/Dashboards/Default');
-            } else {
-                return "error";
-            }
-        } catch (RequestException $e) {
-            // Handle request exception
-            return redirect('/')->withErrors(['Invalid credentials']);
-        }
+    //         if ($response->ok()) {
+    //             $data = json_decode($response->getBody(), true);
+    //             session()->put(['user' => $data['user']]);
+    //             return redirect('/Dashboards/Default');
+    //         } else {
+    //             return "error";
+    //         }
+    //     } catch (RequestException $e) {
+    //         // Handle request exception
+    //         return redirect('/')->withErrors(['Invalid credentials']);
+    //     }
+    // }
+
+    public function login(Request $request)
+{
+    $response = Http::withHeaders([
+        'X-CSRF-TOKEN' => $request->session()->token(),
+    ])->post('http://localhost:8001/api/login', [
+        'email' => $request->email,
+        'password' => $request->password,
+    ]);
+
+    if ($response->ok()) {
+        return $response;
+    } else {
+        return "Error";
     }
+}
 
 }
 
