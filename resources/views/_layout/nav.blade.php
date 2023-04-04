@@ -5,7 +5,8 @@
             <!-- Logo can be added directly -->
         <!-- <img src="{{ asset('/img/logo/logo-white.svg') }}" alt="logo" /> -->
             <!-- Or added via css to provide different ones for different color themes -->
-            <div class="img"></div>
+            {{-- <div class="img"></div> --}}
+            <h2 style="color: white; font-weight:bold">littlefingers</h2>
         </a>
     </div>
     <!-- Logo End -->
