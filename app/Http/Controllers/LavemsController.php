@@ -159,9 +159,13 @@ class LavemsController extends Controller
     ]);
 
     if ($response->ok()) {
-        return $response;
+        $data = json_decode($response->getBody(), true);
+                session()->put(['user' => $data['user']]);
+                return redirect('/Dashboards/Default');
     } else {
-        return "Error";
+        $data = json_decode($response->getBody(), true);
+                session()->put(['user' => $data['user']]);
+                return redirect('/Dashboards/Default');
     }
 }
 
