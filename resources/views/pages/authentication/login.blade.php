@@ -63,8 +63,9 @@
                 </p> --}}
             </div>
             <div>
-                <form method="post" action="{{route('login.fire')}}">
-                    @csrf
+                <form method="POST" action="{{url('login-action')}}">
+                    {{-- @csrf --}}
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-cs-icon="email"></i>
                         <input class="form-control" placeholder="Email" name="email"/>
