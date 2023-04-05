@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use PDF;
+// use PDF;
+use Dompdf\Dompdf;
 use Illuminate\Http\Client\RequestException;
 
 class LavemsController extends Controller
@@ -39,6 +40,14 @@ class LavemsController extends Controller
         $invoices   = Http ::get($theUrl)->collect();
         // return $clients;
         return view('project.invoices', ['invoices' => $invoices]);
+    }
+
+    public function getPayments(){
+
+        $theUrl     = config('app.guzzle_test_url').'/api/subvendor_payments/';
+        $payments   = Http ::get($theUrl)->collect();
+        // return $clients;
+        return view('project.payments', ['payments' => $payments]);
     }
 
     public function storeInvoice(Request $request){
@@ -106,47 +115,31 @@ class LavemsController extends Controller
 
      }
 
-     public function printClientPDF($id){
-        $theUrl = config('app.guzzle_test_url').'/api/export_client_pdf/'.$id;
-        $pdf = Http ::get($theUrl)->collect();
-        return $pdf;
+     public function clientReceipt(Request $request){
+        $theUrl = config('app.guzzle_test_url').'/api/receipt/'.$request->id;
+        $data = Http ::get($theUrl);
+        // $data = json_decode($receipt, true);
+
+        foreach(json_decode($data) as $item){
+            $invoice_number = $item->invoice_number;
+            $client_id = $item->client_id;
+            $contact_address = $item->contact_address;
+            $nature_of_business = $item->nature_of_business;
+            $client_name = $item->name;
+            $invoice_date = $item->created_at;
+            $phone_number = $item->phone_number;
+            // $quantity = $item->quantity;
+
+        }
+
+        // return $receipt;
+        $pdf = new Dompdf();
+        $pdf = \PDF::loadView('project.receipt', compact('data'), ['invoice_number'=>$invoice_number, 'client_id'=>$client_id, 'contact_address'=>$contact_address, 'nature_of_business'=>$nature_of_business, 'client_name'=>$client_name, 'invoice_date'=>$invoice_date, 'phone_number'=>$phone_number]);
+        return $pdf->stream();
+    // return $pdf->stream('my-pdf-file.pdf');
      }
 
-    //  public function createPDF($id) {
-    //     // retreive all records from db
-    //     // $data = Employee::all();
-    //     // share data to view
-    //     $theUrl = config('app.guzzle_test_url').'/api/export_client_pdf/'.$id;
-    //     $data = Http ::get($theUrl)->collect();
-    //     view()->share('employee',$data);
-    //     $pdf = PDF::loadView('pdf_view', [$data]);
-    //     // download PDF file with download method
-    //     return $pdf->download('pdf_file.pdf');
-    //   }
 
-
-
-    // Login controller
-    // public function login(Request $request)
-    // {
-    //     try {
-    //         $response = Http::post(config('app.guzzle_test_url').'/api/login/', [
-    //             'email' => $request->email,
-    //             'password' => $request->password,
-    //         ]);
-
-    //         if ($response->ok()) {
-    //             $data = json_decode($response->getBody(), true);
-    //             session()->put(['user' => $data['user']]);
-    //             return redirect('/Dashboards/Default');
-    //         } else {
-    //             return "error";
-    //         }
-    //     } catch (RequestException $e) {
-    //         // Handle request exception
-    //         return redirect('/')->withErrors(['Invalid credentials']);
-    //     }
-    // }
 
     public function login(Request $request)
 {

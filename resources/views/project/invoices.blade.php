@@ -51,7 +51,7 @@
                                     id="dashboardTourButton" data-bs-toggle="modal"
                                     data-bs-target="#exampleModal">
                                     <i data-cs-icon="plus"></i>
-                                <span>Add Client</span>
+                                <span>Generate Invoice</span>
                             </button>
 
                         </div>
