@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 // use PDF;
 use Dompdf\Dompdf;
-use Barryvdh\DomPDF\Facade;
+// use Barryvdh\DomPDF\Facade;
 use Illuminate\Http\Client\RequestException;
 
 class LavemsController extends Controller
@@ -120,19 +120,21 @@ class LavemsController extends Controller
         $theUrl = config('app.guzzle_test_url').'/api/receipt/'.$request->id;
         $data = Http ::get($theUrl);
         // $data = json_decode($receipt, true);
+        $response = json_decode($data, true);
 
-        foreach(json_decode($data) as $item){
-            $invoice_number = $item->invoice_number;
-            $client_id = $item->client_id;
-            $contact_address = $item->contact_address;
-            $nature_of_business = $item->nature_of_business;
-            $client_name = $item->name;
-            $invoice_date = $item->created_at;
-            $phone_number = $item->phone_number;
-            // $quantity = $item->quantity;
-
+        foreach ($response['receipt'] as $item) {
+            $invoice_number = $item['invoice_number'];
+            $client_id = $item['client_id'];
+            $contact_address = $item['contact_address'];
+            $nature_of_business = $item['nature_of_business'];
+            $client_name = $item['name'];
+            $invoice_date = $item['created_at'];
+            $phone_number = $item['phone_number'];
+            // $quantity = $item['quantity'];
         }
 
+        $grand_total = $response['grand_total'];
+        // $data2 = $response['receipt'];
         // return $receipt;
         $pdf = new Dompdf();
         $pdf = \PDF::loadView('project.receipt', compact('data'), ['invoice_number'=>$invoice_number, 'client_id'=>$client_id, 'contact_address'=>$contact_address, 'nature_of_business'=>$nature_of_business, 'client_name'=>$client_name, 'invoice_date'=>$invoice_date, 'phone_number'=>$phone_number]);
