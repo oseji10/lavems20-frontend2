@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 // use PDF;
 use Dompdf\Dompdf;
+use Barryvdh\DomPDF\Facade;
 use Illuminate\Http\Client\RequestException;
 
 class LavemsController extends Controller
