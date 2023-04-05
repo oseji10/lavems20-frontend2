@@ -175,7 +175,7 @@ $get_amount=$class_obj->convert_number($item['grand_total']);
 
 
 
-<p style="padding-left:30px;"> Amount in words:<i style='border-bottom:dotted; font-size:16px'> <?php echo $get_amount; ?> naira <i></p>
+<p style="padding-left:30px;"> Amount in words:<i style='border-bottom:dotted; font-size:16px'> <?php echo $get_amount; ?> naira ONLY<i></p>
 
     <table width='100%' border='0'>
       <tr>

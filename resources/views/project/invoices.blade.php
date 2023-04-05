@@ -75,7 +75,7 @@
                     <div class="modal-body">
                         <form method="post" action="{{url('search-client')}}">
                             @csrf
-                        <input class="form-control" type="text" placeholder="Enter Phone Number or Email" name="id" required/>
+                        <input class="form-control" type="text" placeholder="Enter Client ID, Phone Number or Email" name="id" required/>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Search Client</button>
@@ -85,6 +85,15 @@
                 </div>
             </div>
         </div>
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
                     <!-- Hoverable Rows Start -->
                     <section class="scroll-section" id="hoverableRows">

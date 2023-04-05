@@ -44,3 +44,5 @@
 <link rel="stylesheet" href="{{ asset('/css/main.css') }}"/>
 <!-- Template Base Styles End -->
 <script src="{{ asset('/js/base/loader.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+

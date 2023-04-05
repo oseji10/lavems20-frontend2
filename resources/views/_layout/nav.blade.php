@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+
 <div class="nav-content d-flex">
     <!-- Logo Start -->
     <div class="logo position-relative">
@@ -262,12 +264,42 @@
                     </li>
 
                     <li>
-                        <a href="/generate-receipt">
+                        <a href="#receiptModal" data-toggle="modal">
                             <span class="label">Issue Receipt</span>
                         </a>
                     </li>
+
+
+                         <!-- Print Receipt Modal -->
+                         <div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabelDefault">Print Receipt</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                            <!-- <i data-cs-icon="close"></i> -->
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" action="{{url('/receipt')}}">
+                                            @csrf
+                                        <input class="form-control" type="text" placeholder="Enter Invoice Number" name="id" required/>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Print Receipt</button>
+                                        {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+
                 </ul>
             </li>
+
+
+
 
 
             <li>

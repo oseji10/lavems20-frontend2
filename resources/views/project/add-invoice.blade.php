@@ -87,12 +87,12 @@
                             <table width="50%" >
                                 <tr>
                                     <td width="20%"><h3>Client ID: </h3></td>
-                                    <td><h3>{{$clients['client_id']}}</h3></td>
+                                    <td><h3>{{$clients['client_id'] ?? null}}</h3></td>
                                 </tr>
 
                                 <tr>
                                     <td width="20%"><h3>Client Name: </h3></td>
-                                    <td><h3>{{$clients['name']}}</h3></td>
+                                    <td><h3>{{$clients['name'] ?? null}}</h3></td>
                                 </tr>
                             </table>
 <br/>
@@ -109,7 +109,8 @@
                                         </tr>
                                         <tr>
                                             <td><div class="mb-3 filled">
-
+                                                <input type="hidden" value="{{$clients['client_id'] ?? null}}" name="client_id" />
+                                                <input type="hidden" value="{{$clients['client_id'] ?? null}}" name="client_id" />
                                                 <input type="text" name="equipment_serial_numbers[]" placeholder="Equipment Serial Number" class="form-control">
                                                 </div></td>
                                             <td style="width:50%"><div class="mb-3 filled">

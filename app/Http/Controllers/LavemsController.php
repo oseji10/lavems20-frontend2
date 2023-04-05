@@ -30,8 +30,14 @@ class LavemsController extends Controller
         $theUrl     = config('app.guzzle_test_url').'/api/search-client/'.$request->id;
         $response   = Http ::get($theUrl)->collect();
         // return $response;
-        return view('project.add-invoice', ['clients' => $response]);
-
+        // return view('project.add-invoice', ['clients' => $response]);
+        $response = Http::get($theUrl);
+if ($response->successful()) {
+    return view('project.add-invoice', ['clients' => $response['client']]);
+} else {
+    // return view('project.invoices', ['message' => 'Sorry! This client was not found']);
+    return redirect()->back()->withErrors(['Ooops! It appears the CLIENT does not exist. Please verify or use a different parameter']);
+}
 
     }
 
