@@ -221,6 +221,7 @@ Route::prefix('Interface')->group(function () {
 Route::get('/clients', [LavemsController::class, 'getClients'])->name('client.show');
 Route::get('/client-form', [LavemsController::class, 'showClientForm'])->name('show.client');
 Route::post('/add-client', [LavemsController::class, 'addClient'])->name('client.add');
+Route::get('/add-invoice', [LavemsController::class, 'addInvoice'])->name('invoice.add');
 
 Route::post('login-action', [LavemsController::class, 'login'])->name('login.fire');
 

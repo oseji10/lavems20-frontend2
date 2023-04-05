@@ -71,6 +71,7 @@
                             <div class="card-body">
 
 
+
                                 {{-- @if (session('status'))
                                 <div class="alert alert-success">
                                 {{ session('status') }}
@@ -87,12 +88,13 @@
                             <table width="50%" >
                                 <tr>
                                     <td width="20%"><h3>Client ID: </h3></td>
-                                    <td><h3>{{$clients['client_id'] ?? null}}</h3></td>
+
+                                    <td><h3>{{ $client_id = request()->input('clientId');}}</h3></td>
                                 </tr>
 
                                 <tr>
                                     <td width="20%"><h3>Client Name: </h3></td>
-                                    <td><h3>{{$clients['name'] ?? null}}</h3></td>
+                                    <td><h3>{{ $client_name = request()->input('clientName');}}</h3></td>
                                 </tr>
                             </table>
 <br/>
@@ -109,8 +111,8 @@
                                         </tr>
                                         <tr>
                                             <td><div class="mb-3 filled">
-                                                <input type="hidden" value="{{$clients['client_id'] ?? null}}" name="client_id" />
-                                                <input type="hidden" value="{{$clients['client_id'] ?? null}}" name="client_id" />
+                                                {{-- <input type="hidden" value="{{$clients['client_id'] ?? null}}" name="client_id" /> --}}
+                                                <input type="hidden" value="{{ $clientId ?? null}}" name="client_id" />
                                                 <input type="text" name="equipment_serial_numbers[]" placeholder="Equipment Serial Number" class="form-control">
                                                 </div></td>
                                             <td style="width:50%"><div class="mb-3 filled">
@@ -161,6 +163,30 @@
                                   itemContainer.appendChild(newItem);
                                 });
                               </script>
+
+
+{{-- <script>
+    // Check if the URL has a clientId parameter
+    if (window.location.search.includes('clientId=')) {
+        // Get the clientId value from the URL
+        const clientId = new URLSearchParams(window.location.search).get('clientId');
+
+        // Replace the current URL with one that includes the clientId
+        window.history.pushState({}, '', '/project/add-invoice?clientId=' + clientId);
+    }
+
+    // Wait for the modal to be shown
+    $('#myModal').on('shown.bs.modal', function () {
+        // Get the clientId value from the input field in the modal
+        const clientId = $('#clientId').val();
+
+        // Replace the current URL with one that includes the clientId
+        window.history.pushState({}, '', '/project/add-invoice?clientId=' + clientId);
+    });
+</script> --}}
+
+
+
 
                             </div>
                         </div>
