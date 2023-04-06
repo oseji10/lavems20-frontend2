@@ -97,47 +97,53 @@
 
                     <!-- Hoverable Rows Start -->
                     <section class="scroll-section" id="hoverableRows">
-                        {{-- <h2 class="small-title">List of Clients</h2> --}}
                         <div class="card mb-5">
-                            <div class="card-body">
-                                <table class="table table-hover">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Invoice Number</th>
-                                        <th scope="col">Client ID</th>
-                                        <th scope="col">Client Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Total Cost</th>
-                                        <th scope="col">Invoiced By</th>
-                                        <th scope="col">Invoice Date</th>
-                                        <th></th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php  $i=1; ?>
-                                    <tr>
+                          <div class="card-body">
+                            <table class="table table-hover">
+                              <thead>
+                                <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Invoice Number</th>
+                                  <th scope="col">Client ID</th>
+                                  <th scope="col">Client Name</th>
+                                  <th scope="col">Email</th>
+                                  <th scope="col">Total Cost</th>
+                                  <th scope="col">Invoiced By</th>
+                                  <th scope="col">Invoice Date</th>
+                                  <th></th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <?php $i = 1; ?>
+                                @foreach ($invoices as $data)
+                                <tr>
+                                  <th scope="row"><?php echo $i++; ?></th>
+                                  <td>{{$data['invoice_number'] ?? null}}</td>
+                                  <td>{{$data['client_id'] ?? null}}</td>
+                                  <td style="text-transform:uppercase">{{$data['name'] ?? null}}</td>
+                                  <td>{{$data['email'] ?? null}}</td>
+                                  <td>&#8358;{{ number_format($data['total'] ?? null, 2) }}</td>
+                                  <td>{{$data['created_by'] ?? null}}</td>
+                                  <td>{{ Carbon\Carbon::parse($data['created_at'])->format('D, d-m-Y ') }}</td>
+                                  <td>
+                                    <a href="/print_invoice?id={{$data['invoice_number']}}"><i data-cs-icon="print"></i></a>
 
-                                        @foreach ($invoices as $data)
 
-
-                                        <th scope="row"><?php echo $i++; ?></th>
-                                        <td>{{$data['invoice_number'] ?? null}}</td>
-                                        <td>{{$data['client_id'] ?? null}}</td>
-                                        <td style="text-transform:uppercase">{{$data['name'] ?? null}}</td>
-                                        <td>{{$data['email'] ?? null}}</td>
-                                        <td>&#8358;{{ number_format($data['total'] ?? null, 2) }}</td>
-                                        <td>{{$data['created_binvoiced_byy'] ?? null}}</td>
-                                        <td>{{ Carbon\Carbon::parse($data['created_at'])->format('D, d-m-Y ') }}</td>
-                                        <td><a href="">View</a>&nbsp;<a href="">Email</a>&nbsp;<a href="">Edit</a></td>
-
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                                    &nbsp;
+                                    <a href=""><i data-cs-icon="send"></i></a>
+                                    &nbsp;
+                                    <a href="">Edit</a>
+                                  </td>
+                                </tr>
+                                @endforeach
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
-                    </section>
+                      </section>
+
+
+
                     <!-- Hoverable Rows End -->
 
 

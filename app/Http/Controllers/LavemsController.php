@@ -226,13 +226,7 @@ public function test(Request $request){
 
 public function storeInvoice(Request $request)
 {
-    // Validate the request data
-    // $request->validate([
-    //     'client_id' => 'required',
-    //     'equipment_serial_numbers.*' => 'required',
-    //     'equipments.*' => 'required',
-    //     'quantities.*' => 'required',
-    // ]);
+
 
     // Get the input data from the request
     $clientId = $request->input('client_id');
@@ -376,6 +370,44 @@ public function clientReceipt(Request $request)
 
     // Generate the PDF receipt using the extracted data
     $pdf = \PDF::loadView('project.receipt', compact('data'), ['invoice_number'=>$invoice_number, 'client_id'=>$client_id, 'contact_address'=>$contact_address, 'nature_of_business'=>$nature_of_business, 'client_name'=>$client_name, 'invoice_date'=>$invoice_date, 'phone_number'=>$phone_number]);
+
+    // Stream the PDF to the HTTP response
+    return $pdf->stream();
+}
+
+
+public function clientInvoice(Request $request)
+{
+    $invoiceNumber = $request->query('id');
+    // Make a GET request to an external API to get invoice data
+    $theUrl = config('app.guzzle_test_url').'/api/invoice/'.$invoiceNumber;
+    $response = Http::get($theUrl);
+
+    // Check if the response is successful
+    if (!$response->ok()) {
+        return redirect()->back()->withErrors(['There was an error. Please check form again']);
+    }
+
+    // Decode the JSON response and check if it contains the required data
+    $data = json_decode($response->body(), true);
+    if (!isset($data['invoice'])) {
+        return redirect()->back()->withErrors(['No data returned from the API']);
+    }
+
+    // Extract the required data from the response
+    $invoice = $data['invoice'][0];
+    $client_id = $invoice['client_id'];
+    $contact_address = $invoice['contact_address'];
+    $nature_of_business = $invoice['nature_of_business'];
+    $client_name = $invoice['name'];
+    $invoice_date = $invoice['created_at'];
+    $phone_number = $invoice['phone_number'];
+
+    // Get the grand total from the response data
+    $grand_total = $data['grand_total'];
+
+    // Generate the PDF invoice using the extracted data
+    $pdf = \PDF::loadView('project.invoice', compact('data'), ['invoice_number'=>$invoiceNumber, 'client_id'=>$client_id, 'contact_address'=>$contact_address, 'nature_of_business'=>$nature_of_business, 'client_name'=>$client_name, 'invoice_date'=>$invoice_date, 'phone_number'=>$phone_number, 'grand_total'=>$grand_total]);
 
     // Stream the PDF to the HTTP response
     return $pdf->stream();

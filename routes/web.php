@@ -237,6 +237,7 @@ Route::post('search-client', [LavemsController::class, 'searchClient'])->name('q
 Route::get('/payments', [LavemsController::class, 'getPayments']);
 
 Route::post('receipt', [LavemsController::class,'clientReceipt'])->name('print.receipt');
+Route::get('/print_invoice', [LavemsController::class,'clientInvoice']);
 
 // Route::get('/create-symlink', function (){
 //     symlink(storage_path('/app/public'), public_path('storage'));
