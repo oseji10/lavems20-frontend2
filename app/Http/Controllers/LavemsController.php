@@ -10,6 +10,14 @@ use Dompdf\Dompdf;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Log;
 
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Auth;
+
+
+
+
 class LavemsController extends Controller
 {
 // public function __construct()
@@ -125,13 +133,16 @@ public function test(Request $request){
 
 
 
-     public function getInvoices(){
+    public function getInvoices(){
 
         $theUrl     = config('app.guzzle_test_url').'/api/invoice/';
         $invoices   = Http ::get($theUrl)->collect();
         // return $clients;
         return view('project.invoices', ['invoices' => $invoices]);
     }
+
+
+
 
     public function getPayments(){
 
@@ -416,26 +427,65 @@ public function clientInvoice(Request $request)
 
 
 
-    public function login(Request $request)
+
+
+public function login(Request $request)
 {
-    $response = Http::withHeaders([
-        'X-CSRF-TOKEN' => $request->session()->token(),
-    ])->post(config('app.guzzle_test_url').'/api/login/', [
-        'email' => $request->email,
-        'password' => $request->password,
-        // $csrf_token = csrf_token();
+    $request->validate([
+        'email' => 'required|string|email',
+        'password' => 'required|string',
     ]);
 
-    if ($response->ok()) {
-        $data = json_decode($response->getBody(), true);
-                session()->put(['user' => $data['user']]);
-                return redirect('/Dashboards/Default');
+    $response = Http::post(config('app.guzzle_test_url') . '/api/login', [
+        'email' => $request->email,
+        'password' => $request->password,
+    ]);
+
+    if ($response->successful()) {
+        $data = $response->json();
+
+        // Store the user data in session
+        session()->put('user', $data['user']);
+
+        // Set the authorization token in the cookie
+        Cookie::queue('Authorization', 'Bearer ' . $data['authorisation']['token'], 60 * 24 * 30);
+
+        return redirect('/Dashboards/Default');
     } else {
-        $data = json_decode($response->getBody(), true);
-                // session()->put(['user' => $data['user']]);
-                return redirect('/Dashboards/Default');
+        // If the authentication fails, redirect back with error message
+        return back()->withErrors(['email' => 'Invalid email or password.'])->withInput();
     }
 }
+
+
+public function logout()
+{
+    if (Auth::check()) {
+        $user = Auth::user();
+        $token = Auth::tokenById($user->id);
+
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer ' . $token,
+            'Accept' => 'application/json',
+        ])->post(config('app.guzzle_test_url').'/api/logout');
+
+        if ($response->ok()) {
+            // Clear the user's session and logout the user locally
+            Auth::logout();
+            session()->invalidate();
+            session()->regenerateToken();
+            return redirect('/Pages/Authentication/Login');
+        } else {
+            // Handle any error response from the API
+            return back()->withErrors(['error' => 'Failed to logout']);
+        }
+    } else {
+        // No user is authenticated, so just redirect to the login page
+        return redirect('/Pages/Authentication/Login');
+    }
+}
+
+
 
 }
 

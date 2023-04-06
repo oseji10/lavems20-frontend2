@@ -71,6 +71,7 @@
                                         <th scope="col">Client Name</th>
                                         <th scope="col">Phone</th>
                                         <th scope="col">Email</th>
+                                        <th scope="col">Registered By</th>
                                         <th scope="col">Registration Date</th>
                                         <th></th>
                                     </tr>
@@ -87,6 +88,7 @@
                                         <td>{{$data['name'] ?? null}}</td>
                                         <td>{{$data['phone_number'] ?? null}}</td>
                                         <td>{{$data['email'] ?? null}}</td>
+                                        <td>{{$data['user']['first_name'] ?? null}} {{$data['user']['last_name'] ?? null}}</td>
                                         <td>{{ Carbon\Carbon::parse($data['created_at'])->format('D, d-m-Y ') }}</td>
                                         <td><a href="">Edit</a></td>
 

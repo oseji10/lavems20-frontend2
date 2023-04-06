@@ -29,10 +29,8 @@
         <a href="#" class="d-flex user position-relative" data-bs-toggle="dropdown" aria-haspopup="true"
            aria-expanded="false">
             <img class="profile" alt="profile" src="{{ asset('/img/profile/profile-9.jpg') }}"/>
-            {{-- @auth
 
-            @endauth --}}
-            <div class="name">{{session('user.first_name')}}</div>
+            <div class="name" style="font-weight:bold; font-size:14pt;">Hi, {{session('user.first_name')}} {{session('user.last_name')}}</div>
         </a>
         <div class="dropdown-menu dropdown-menu-end user-menu wide">
             {{-- <div class="row mb-3 ms-0 me-0">
@@ -116,12 +114,21 @@
                                 <span class="align-middle">Settings</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
-                                <i data-cs-icon="logout" class="me-2" data-cs-size="17"></i>
-                                <span class="align-middle">Logout</span>
-                            </a>
-                        </li>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Logout</button>
+                        </form>
+
+                        <script>
+                            $(document).ready(function() {
+                                $('#logout-form').submit(function(event) {
+                                    event.preventDefault();
+                                    $.post($(this).attr('action'), $(this).serialize(), function() {
+                                        window.location.href = '/Pages/Authentication/Login'; // Redirect to login page
+                                    });
+                                });
+                            });
+                        </script>
                     </ul>
                 </div>
             </div>

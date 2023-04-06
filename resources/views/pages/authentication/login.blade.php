@@ -64,9 +64,23 @@
                 </p> --}}
             </div>
             <div>
-                <form method="POST" action="{{route('login.fire')}}">
+                {{-- <form method="POST" action="{{route('login.fire')}}">
                     @csrf
-                    {{-- <input type="hidden" name="_token" value="{{ csrf_token() }}" /> --}}
+                    <div class="mb-3 filled form-group tooltip-end-top">
+                        <i data-cs-icon="email"></i>
+                        <input class="form-control" placeholder="Email" name="email"/>
+                    </div>
+                    <div class="mb-3 filled form-group tooltip-end-top">
+                        <i data-cs-icon="lock-off"></i>
+                        <input class="form-control pe-7" name="password" type="password" placeholder="Password"/>
+                        <a class="text-small position-absolute t-3 e-3"
+                           href="{{ url('/Pages/Authentication/ForgotPassword') }}">Forgot?</a>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-primary">Login</button>
+                </form> --}}
+
+                <form method="POST" action="{{ route('login.fire') }}">
+                    @csrf
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-cs-icon="email"></i>
                         <input class="form-control" placeholder="Email" name="email"/>
@@ -79,6 +93,8 @@
                     </div>
                     <button type="submit" class="btn btn-lg btn-primary">Login</button>
                 </form>
+
+
             </div>
         </div>
     </div>

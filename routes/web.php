@@ -224,6 +224,7 @@ Route::post('/add-client', [LavemsController::class, 'addClient'])->name('client
 Route::get('/add-invoice', [LavemsController::class, 'addInvoice'])->name('invoice.add');
 
 Route::post('login-action', [LavemsController::class, 'login'])->name('login.fire');
+Route::post('logout', [LavemsController::class, 'logout'])->name('logout');
 
 Route::get('/load_invoices', [LavemsController::class, 'load_invoices'])->name('load_invoices');
 
