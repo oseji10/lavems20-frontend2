@@ -1,6 +1,6 @@
 @php
     $html_tag_data = ["scrollspy"=>"true"];
-    $title = 'Tables';
+    $title = 'Clients';
     $description = 'Examples for opt-in styling of tables (given their prevalent use in JavaScript plugins) with Bootstrap.';
     $breadcrumbs = ["/"=>"Home","/Interface"=>"Interface","/Interface/Content"=>"Content"]
 @endphp

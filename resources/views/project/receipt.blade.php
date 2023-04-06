@@ -1,5 +1,5 @@
 <head>
-  <title>LAVEMS Proforma Invoice</title>
+  <title>LAVEMS Receipt</title>
 </head>
 <body style="border-style: double;
     border-width: 2px;
@@ -14,7 +14,7 @@
       <td style="text-align:right">Office Suite: Suite 309 DBM Plaza, Wuse 2, Abuja<br/>Tel: 08036576494, 0987675589<br/>Email: littlefingers@rocketmail.com, info@littlefingers.com<br/></td>
 </tr>
 <tr>
-  <td colspan="2" style="text-align:center; font-size:30px;">PROFORMA INVOICE</td>
+  <td colspan="2" style="text-align:center; font-size:30px;">CUSTOMER RECEIPT</td>
 </tr>
 </table>
 
@@ -33,13 +33,13 @@
 <tr>
 
 
-<td>Invoice Date:  {{$invoice_date ?? null}}</td>
+<td>Payment Date:  {{$invoice_date ?? null}}</td>
 </tr>
 
 <tr>
 
 
-<td>Invoice Number:  {{$invoice_number ?? null}}</td>
+<td>Payment ID:  {{$invoice_number ?? null}}</td>
 </tr>
 
 
@@ -178,9 +178,9 @@ $get_amount=$class_obj->convert_number($item['grand_total']);
 <p style="padding-left:30px;"> Amount in words:<i style='border-bottom:dotted; font-size:16px'> <?php echo $get_amount; ?> naira ONLY<i></p>
 
     <table width='100%' border='0'>
-      <tr>
+      {{-- <tr>
         <td colspan='2' style='text-align:center; font-weight:bold; font-size:16px'>Bank Account Name: Little Fingers Integrated<br/>Bank: NIRSAL MFB<br/>Account number: 0250265614<br/></td>
-    </tr>
+    </tr> --}}
     <tr>
     <td colspan="2" style='text-align:center' width="40%"><br/><img src="img/okuma.jpeg" width="100px" height="100px"/><hr style='border-bottom:dotted' width="200px"/></td>
 
@@ -194,8 +194,8 @@ $get_amount=$class_obj->convert_number($item['grand_total']);
     <footer>
         <br/>
 
-          <p style="text-align:center; font-size:12px">We declare that the above information is true and correct to the best of our knowledge. For and on behalf of the above-named company.
-      This proforma invoice is valid for 30 days</p>
+          {{-- <p style="text-align:center; font-size:12px">We declare that the above information is true and correct to the best of our knowledge. For and on behalf of the above-named company.
+      This proforma invoice is valid for 30 days</p> --}}
           <p><i style="font-size:10px">Generated from LAVEMS servers at <?php date_default_timezone_set("Africa/Lagos"); echo date('Y-m-d h:i:sa'); ?></i></p>
       </footer>
 
