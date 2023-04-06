@@ -126,7 +126,7 @@
                                   <td>{{$data['created_by'] ?? null}}</td>
                                   <td>{{ Carbon\Carbon::parse($data['created_at'])->format('D, d-m-Y ') }}</td>
                                   <td>
-                                    <a href="/print_invoice?id={{$data['invoice_number']}}"><i data-cs-icon="print"></i></a>
+                                    <a target="_blank" href="/print_invoice?id={{$data['invoice_number']}}"><i data-cs-icon="print"></i></a>
 
 
                                     &nbsp;
