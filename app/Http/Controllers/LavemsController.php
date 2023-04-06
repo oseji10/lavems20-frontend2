@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 use Dompdf\Dompdf;
 // use Barryvdh\DomPDF\Facade;
 use Illuminate\Http\Client\RequestException;
+use Illuminate\Support\Facades\Log;
 
 class LavemsController extends Controller
 {
@@ -15,6 +16,70 @@ class LavemsController extends Controller
 // {
 //     $this->middleware('auth', ['except' => ['login', 'register']]);
 // }
+
+public function load_invoices(){
+    return view('project.invoices');
+}
+
+public function test(Request $request){
+    // Validate the request data
+    // Log the input data
+    Log::info($request->all());
+
+    $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $pin = mt_rand(100000, 999999)
+        . mt_rand(100000, 999999);
+    $random_string = str_shuffle($pin);
+    // Validate the request data
+    $request->validate([
+        'equipment_serial_numbers.*' => 'required|string',
+        'equipments.*' => 'required|string',
+        'quantities.*' => 'required|integer',
+        'costs.*' => 'required|integer',
+    ]);
+    $invoice_number = $random_string;
+    $clientId = $request->input('client_id');
+    $equipmentSerialNumbers = $request->input('equipment_serial_numbers');
+    $equipments = $request->input('equipments');
+    $quantities = $request->input('quantities');
+    $costs = $request->input('costs');
+
+
+    // Loop through the input data and create a new invoice for each item
+    foreach ($equipmentSerialNumbers as $key => $equipmentSerialNumber) {
+        $invoiceData = [
+            'invoice_number' => $invoice_number,
+            'client_id' => $clientId,
+            'equipment_serial_number' => $equipmentSerialNumber,
+            'equipment' => $equipments[$key],
+            'quantity' => $quantities[$key],
+            'cost' => $costs[$key],
+        ];
+
+        // Post the invoice data to the external API endpoint
+        try {
+            $theUrl = config('app.guzzle_test_url') . '/api/invoice';
+            $response = Http::post($theUrl, $invoiceData);
+            // Log the response from the API
+            Log::info('API Response: ' . $response->getBody());
+
+            // Check if the response was successful and display a message
+            if ($response->successful()) {
+                $message = 'Invoice added successfully.';
+            } else {
+                $message = 'There was an error adding the invoice. Please try again.';
+            }
+        } catch (\Exception $e) {
+            // Log the error or display an error message
+            Log::error('Error sending invoice to API: ' . $e->getMessage());
+            $message = 'There was an error adding the invoice. Please try again.';
+        }
+    }
+
+    // Redirect back with the message
+    return redirect()->back()->with('success', $message);
+    // return redirect()->route('/load_invoices', ['message' => $message]);
+}
 
 
     public function getClients(){
@@ -107,54 +172,104 @@ class LavemsController extends Controller
     //     }
     // }
 
-    public function storeInvoice(Request $request)
-    {
-        // Validate the request data
-        $request->validate([
-            'client_id' => 'required',
-            'equipment_serial_numbers.*' => 'required',
-            'equipments.*' => 'required',
-            'quantities.*' => 'required',
-        ]);
+//     public function storeInvoice(Request $request)
+//     {
+//         // Validate the request data
+//         $request->validate([
+//             'client_id' => 'required',
+//             'equipment_serial_numbers.*' => 'required',
+//             'equipments.*' => 'required',
+//             'quantities.*' => 'required',
+//         ]);
 
-        // Get the input data from the request
-        $clientId = $request->input('client_id');
-        $equipmentSerialNumbers = $request->input('equipment_serial_numbers');
-        $equipments = $request->input('equipments');
-        $quantities = $request->input('quantities');
+//         // Get the input data from the request
+//         $clientId = $request->input('client_id');
+//         $equipmentSerialNumbers = $request->input('equipment_serial_numbers');
+//         $equipments = $request->input('equipments');
+//         $quantities = $request->input('quantities');
 
-        // Loop through the input data and create a new invoice for each item
-        foreach ($equipmentSerialNumbers as $key => $equipmentSerialNumber) {
-            $invoiceData = [
-                'client_id' => $clientId,
-                'equipment_serial_number' => $equipmentSerialNumber,
-                'equipment_name' => $equipments[$key],
-                'quantity' => $quantities[$key],
-            ];
+//         // \Log::info($clientId);
+// return $clientId;
+//         // Loop through the input data and create a new invoice for each item
+//         foreach ($equipmentSerialNumbers as $key => $equipmentSerialNumber) {
+//             $invoiceData = [
+//                 'client_id' => $clientId,
+//                 'equipment_serial_number' => $equipmentSerialNumber,
+//                 'equipment_name' => $equipments[$key],
+//                 'quantity' => $quantities[$key],
+//             ];
 
-            // return "error";
-            // Post the invoice data to the external API endpoint
-            try {
-                $theUrl = config('app.guzzle_test_url') . '/api/invoice';
-                $response = Http::post($theUrl, $invoiceData);
+//             // return "error";
+//             // Post the invoice data to the external API endpoint
+//             try {
+//                 $theUrl = config('app.guzzle_test_url') . '/api/invoice';
+//                 $response = Http::post($theUrl, $invoiceData);
 
 
-                // Check if the response was successful and display a message
-                if ($response->successful()) {
-                    $message = 'Invoice added successfully.';
-                } else {
-                    $message = 'There was an error adding the invoice. Please try again.';
-                }
-            } catch (\Exception $e) {
-                // Log the error or display an error message
-                Log::error('Error sending invoice to API: ' . $e->getMessage());
+//                 // Check if the response was successful and display a message
+//                 if ($response->successful()) {
+//                     $message = 'Invoice added successfully.';
+//                 } else {
+//                     $message = 'There was an error adding the invoice. Please try again.';
+//                 }
+//             } catch (\Exception $e) {
+//                 // Log the error or display an error message
+//                 Log::error('Error sending invoice to API: ' . $e->getMessage());
+//                 $message = 'There was an error adding the invoice. Please try again.';
+//             }
+//         }
+
+//         // Redirect back with the message
+//         return redirect()->back()->with('message', $message);
+//     }
+
+
+public function storeInvoice(Request $request)
+{
+    // Validate the request data
+    // $request->validate([
+    //     'client_id' => 'required',
+    //     'equipment_serial_numbers.*' => 'required',
+    //     'equipments.*' => 'required',
+    //     'quantities.*' => 'required',
+    // ]);
+
+    // Get the input data from the request
+    $clientId = $request->input('client_id');
+    $equipmentSerialNumbers = $request->input('equipment_serial_numbers');
+    $equipments = $request->input('equipments');
+    $quantities = $request->input('quantities');
+
+    // Loop through the input data and create a new invoice for each item
+    foreach ($equipmentSerialNumbers as $key => $equipmentSerialNumber) {
+        $invoiceData = [
+            'client_id' => $clientId,
+            'equipment_serial_number' => $equipmentSerialNumber,
+            'equipment_name' => $equipments[$key],
+            'quantity' => $quantities[$key],
+        ];
+
+        // Post the invoice data to the external API endpoint
+        try {
+            $theUrl = config('app.guzzle_test_url') . '/api/invoice';
+            $response = Http::post($theUrl, $invoiceData);
+
+            // Check if the response was successful and display a message
+            if ($response->successful()) {
+                $message = 'Invoice added successfully.';
+            } else {
                 $message = 'There was an error adding the invoice. Please try again.';
             }
+        } catch (\Exception $e) {
+            // Log the error or display an error message
+            Log::error('Error sending invoice to API: ' . $e->getMessage());
+            $message = 'There was an error adding the invoice. Please try again.';
         }
-
-        // Redirect back with the message
-        return redirect()->back()->with('message', $message);
     }
+
+    // Redirect back with the message
+    return redirect()->back()->with('message', $message);
+}
 
 
 

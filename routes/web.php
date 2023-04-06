@@ -225,16 +225,20 @@ Route::get('/add-invoice', [LavemsController::class, 'addInvoice'])->name('invoi
 
 Route::post('login-action', [LavemsController::class, 'login'])->name('login.fire');
 
+Route::get('/load_invoices', [LavemsController::class, 'load_invoices'])->name('load_invoices');
 
 Route::get('/invoices', [LavemsController::class, 'getInvoices']);
-Route::post('/invoice', [LavemsController::class, 'storeInvoice'])->name('invoice.store');
+Route::post('/invoice', [LavemsController::class, 'test'])->name('invoice.test');
+
+// Route::post('/test', [LavemsController::class, 'test'])->name('invoice.test');
+
 Route::post('search-client', [LavemsController::class, 'searchClient'])->name('query-client');
 
 Route::get('/payments', [LavemsController::class, 'getPayments']);
 
 Route::post('receipt', [LavemsController::class,'clientReceipt'])->name('print.receipt');
 
-Route::get('/create-symlink', function (){
-    symlink(storage_path('/app/public'), public_path('storage'));
-    echo "Symlink Created. Thanks";
-});
+// Route::get('/create-symlink', function (){
+//     symlink(storage_path('/app/public'), public_path('storage'));
+//     echo "Symlink Created. Thanks";
+// });

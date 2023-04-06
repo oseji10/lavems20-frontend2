@@ -99,78 +99,76 @@
                             </table>
 <br/>
 
-<form method="POST" action="{{route('invoice.test')}}">
-    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-    <input type="hidden" name="client_id" value="{{ $client_id}}">
-
-    <div id="item-container">
-      <div class="item">
-        <table style="width:80%">
-          <tr>
-            <td><div class="mb-3 filled"><input type="text" name="equipment_serial_numbers[]" placeholder="Equipment Serial Number" class="form-control"></div></td>
-            <td style="width:50%"><div class="mb-3 filled"><input type="text" name="equipments[]" placeholder="Equipment Name" class="form-control"></div></td>
-            <td><div class="mb-3 filled"><input type="number" name="quantities[]" placeholder="Quantity" class="form-control"></div></td>
-            <td><div class="mb-3 filled"><input type="number" name="costs[]" placeholder="Cost" class="form-control"></div></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-
-    <button class="btn btn-icon btn-icon-start btn-primary mb-1" type="button" id="add-item">
-      <i data-cs-icon="plus"></i>
-      <span>Add Item</span>
-    </button>
-
-    <button class="btn btn-lg btn-icon btn-icon-start btn-primary mb-1" type="submit">
-      <i data-cs-icon="arrow-bottom-right"></i>
-      <span>Submit</span>
-    </button>
-  </form>
-
-  <script>
-    // Add new input fields when "Add Item" button is clicked
-    var addItemButton = document.querySelector('#add-item');
-    var itemContainer = document.querySelector('#item-container');
-
-    addItemButton.addEventListener('click', function() {
-  var newItem = document.createElement('div');
-  newItem.className = 'item';
-  var itemCount = itemContainer.querySelectorAll('.item').length;
-  newItem.innerHTML = `
-    <table style="width:80%">
-      <tr>
-        <td><div class="mb-3 filled"><input type="text" name="equipment_serial_numbers[${itemCount}]" placeholder="Equipment Serial Number" class="form-control"></div></td>
-        <td style="width:40%"><div class="mb-3 filled"><input type="text" name="equipments[${itemCount}]" placeholder="Equipment Name" class="form-control"></div></td>
-        <td><div class="mb-3 filled"><input type="number" name="quantities[${itemCount}]" placeholder="Quantity" class="form-control"></div></td>
-        <td><div class="mb-3 filled"><input type="number" name="costs[${itemCount}]" placeholder="Cost" class="form-control"></div></td>
-      </tr>
-    </table>
-  `;
-  itemContainer.appendChild(newItem);
-});
-
-  </script>
+                            <form method="POST" action="{{route('invoice.test')}}">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 
-{{-- <script>
-    // Check if the URL has a clientId parameter
-    if (window.location.search.includes('clientId=')) {
-        // Get the clientId value from the URL
-        const clientId = new URLSearchParams(window.location.search).get('clientId');
+                                <div id="item-container">
+                                    <table style="width: 80%">
+                                        <tr>
+                                            <td>Equipment Serial Number</td>
+                                            <td>Equipment Name</td>
+                                            <td>Equipment Quantity</td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="mb-3 filled">
 
-        // Replace the current URL with one that includes the clientId
-        window.history.pushState({}, '', '/project/add-invoice?clientId=' + clientId);
-    }
+                                                <input type="text" value="55641853" name="client_id" />
 
-    // Wait for the modal to be shown
-    $('#myModal').on('shown.bs.modal', function () {
-        // Get the clientId value from the input field in the modal
-        const clientId = $('#clientId').val();
 
-        // Replace the current URL with one that includes the clientId
-        window.history.pushState({}, '', '/project/add-invoice?clientId=' + clientId);
-    });
-</script> --}}
+                                                <input type="text" name="equipment_serial_numbers[]" placeholder="Equipment Serial Number" class="form-control">
+                                                </div></td>
+                                            <td style="width:50%"><div class="mb-3 filled">
+                                                <input type="text" name="equipments[]" placeholder="Equipment Name" class="form-control">
+                                                </div></td>
+                                            <td><div class="mb-3 filled">
+                                                <input type="number" name="quantities[]" placeholder="Quantity" class="form-control">
+                                                </div></td>
+                                        </tr>
+                                    </table>
+
+
+
+
+                                </div>
+                                <button class="btn btn-icon btn-icon-start btn-primary mb-1" type="button" id="add-item">
+                                    <i data-cs-icon="plus"></i>
+                                    <span>Add Item</span>
+                                </button>
+                                {{-- <button class="btn btn-icon btn-icon-start btn-primary mb-1"type="button" id="add-item">Add Item</button> --}}
+
+                                <button class="btn btn-lg btn-icon btn-icon-start btn-primary mb-1" type="submit">
+                                    <i data-cs-icon="arrow-bottom-right"></i>
+                                    <span>Submit</span>
+                                </button>
+
+                                {{-- <button type="submit">Submit</button> --}}
+                              </form>
+
+                              <script>
+                                // Add new input fields when "Add Item" button is clicked
+                                var addItemButton = document.querySelector('#add-item');
+                                var itemContainer = document.querySelector('#item-container');
+
+                                addItemButton.addEventListener('click', function() {
+                                  var newItem = document.createElement('div');
+                                  newItem.className = 'item';
+                                  newItem.innerHTML = `
+                                <table style="width:80%">
+                                  <tr>
+                                    <td><div class="mb-3 filled"><input type="text" name="equipment_serial_numbers[]" placeholder="Equipment Serial Number" class="form-control"></div></td>
+                                    <td style="width:50%"><div class="mb-3 filled"><input type="text" name="equipments[]" placeholder="Equipment Name" class="form-control"></div></td>
+                                    <td><div class="mb-3 filled"><input type="number" name="quantities[]" placeholder="Quantity" class="form-control"></div></td>
+                                </tr>
+                                </table>
+
+                                  `;
+                                  itemContainer.appendChild(newItem);
+                                });
+                              </script>
+
+
+
 
 
 
