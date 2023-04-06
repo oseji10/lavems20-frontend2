@@ -1,6 +1,6 @@
 @php
     $html_tag_data = [];
-    $title = 'Default Dashboard';
+    $title = 'Dashboard';
     $description = 'Home screen that contains stats, charts, call to action buttons and various listing elements.';
     $breadcrumbs = ["/"=>"Home","/Dashboards"=>"Dashboards"]
 @endphp
