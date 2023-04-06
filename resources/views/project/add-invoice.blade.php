@@ -100,7 +100,8 @@
 <br/>
 
                             <form method="POST" action="{{route('invoice.store')}}">
-                                @csrf
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
 
                                 <div id="item-container">
                                     <table style="width: 80%">
@@ -112,7 +113,9 @@
                                         <tr>
                                             <td><div class="mb-3 filled">
                                                 {{-- <input type="hidden" value="{{$clients['client_id'] ?? null}}" name="client_id" /> --}}
-                                                <input type="hidden" value="{{ $clientId ?? null}}" name="client_id" />
+                                                {{-- <input type="hidden" value="{{ $client_id = request()->input('clientId');}}" name="client_id" /> --}}
+                                                <input type="hidden" value="{{ $client_id = request()->input('client_id');}}" name="client_id" />
+
                                                 <input type="text" name="equipment_serial_numbers[]" placeholder="Equipment Serial Number" class="form-control">
                                                 </div></td>
                                             <td style="width:50%"><div class="mb-3 filled">

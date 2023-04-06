@@ -86,6 +86,15 @@
             </div>
         </div>
 
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
                     <!-- Hoverable Rows Start -->
                     <section class="scroll-section" id="hoverableRows">
                         {{-- <h2 class="small-title">List of Clients</h2> --}}

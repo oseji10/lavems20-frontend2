@@ -114,7 +114,7 @@ class LavemsController extends Controller
             'client_id' => 'required',
             'equipment_serial_numbers.*' => 'required',
             'equipments.*' => 'required',
-            'quantities.*' => 'required|numeric',
+            'quantities.*' => 'required',
         ]);
 
         // Get the input data from the request
@@ -132,17 +132,24 @@ class LavemsController extends Controller
                 'quantity' => $quantities[$key],
             ];
 
-            return "error";
-            // // Post the invoice data to the external API endpoint
-            // $theUrl = config('app.guzzle_test_url') . '/api/invoice';
-            // $response = Http::post($theUrl, $invoiceData);
+            // return "error";
+            // Post the invoice data to the external API endpoint
+            try {
+                $theUrl = config('app.guzzle_test_url') . '/api/invoice';
+                $response = Http::post($theUrl, $invoiceData);
 
-            // // Check if the response was successful and display a message
-            // if ($response->successful()) {
-            //     $message = 'Invoice added successfully.';
-            // } else {
-            //     $message = 'There was an error adding the invoice. Please try again.';
-            // }
+
+                // Check if the response was successful and display a message
+                if ($response->successful()) {
+                    $message = 'Invoice added successfully.';
+                } else {
+                    $message = 'There was an error adding the invoice. Please try again.';
+                }
+            } catch (\Exception $e) {
+                // Log the error or display an error message
+                Log::error('Error sending invoice to API: ' . $e->getMessage());
+                $message = 'There was an error adding the invoice. Please try again.';
+            }
         }
 
         // Redirect back with the message
@@ -185,31 +192,80 @@ class LavemsController extends Controller
 
      }
 
-     public function clientReceipt(Request $request){
-        $theUrl = config('app.guzzle_test_url').'/api/receipt/'.$request->id;
-        $data = Http ::get($theUrl);
-        // $data = json_decode($receipt, true);
-        $response = json_decode($data, true);
 
-        foreach ($response['receipt'] as $item) {
-            $invoice_number = $item['invoice_number'];
-            $client_id = $item['client_id'];
-            $contact_address = $item['contact_address'];
-            $nature_of_business = $item['nature_of_business'];
-            $client_name = $item['name'];
-            $invoice_date = $item['created_at'];
-            $phone_number = $item['phone_number'];
-            // $quantity = $item['quantity'];
+
+
+ /**
+ * Generates a PDF receipt for a client's invoice
+ *
+ * @param Request $request HTTP request object containing ID of the invoice
+ * @return \Illuminate\Http\Response HTTP response object containing the PDF receipt
+ */
+public function clientReceipt(Request $request)
+{
+    // Make a GET request to an external API to get invoice data
+    $theUrl = config('app.guzzle_test_url').'/api/receipt/'.$request->id;
+    $response = Http::get($theUrl);
+
+    // Check if the response is successful
+    if (!$response->ok()) {
+        return redirect()->back()->withErrors(['There was an error. Please check form again']);
+    }
+
+    // Decode the JSON response and check if it contains the required data
+    $data = json_decode($response->body(), true);
+    if (!isset($data['receipt'])) {
+        return redirect()->back()->withErrors(['No data returned from the API']);
+    }
+
+    // Extract the required data from the response
+    $receipts = $data['receipt'];
+    $invoice_number = '';
+    $client_id = '';
+    $contact_address = '';
+    $nature_of_business = '';
+    $client_name = '';
+    $invoice_date = '';
+    $phone_number = '';
+    foreach ($receipts as $receipt) {
+        if (isset($receipt['invoice_number'])) {
+            $invoice_number = $receipt['invoice_number'];
         }
+        if (isset($receipt['client_id'])) {
+            $client_id = $receipt['client_id'];
+        }
+        if (isset($receipt['contact_address'])) {
+            $contact_address = $receipt['contact_address'];
+        }
+        if (isset($receipt['nature_of_business'])) {
+            $nature_of_business = $receipt['nature_of_business'];
+        }
+        if (isset($receipt['name'])) {
+            $client_name = $receipt['name'];
+        }
+        if (isset($receipt['created_at'])) {
+            $invoice_date = $receipt['created_at'];
+        }
+        if (isset($receipt['phone_number'])) {
+            $phone_number = $receipt['phone_number'];
+        }
+    }
 
-        $grand_total = $response['grand_total'];
-        // $data2 = $response['receipt'];
-        // return $receipt;
-        $pdf = new Dompdf();
-        $pdf = \PDF::loadView('project.receipt', compact('data'), ['invoice_number'=>$invoice_number, 'client_id'=>$client_id, 'contact_address'=>$contact_address, 'nature_of_business'=>$nature_of_business, 'client_name'=>$client_name, 'invoice_date'=>$invoice_date, 'phone_number'=>$phone_number]);
-        return $pdf->stream();
-    // return $pdf->stream('my-pdf-file.pdf');
-     }
+    // Check if the invoice number is present
+    if (empty($invoice_number)) {
+        return redirect()->back()->withErrors(['Sorry! This invoice number does not exist']);
+    }
+
+    // Get the grand total from the response data
+    $grand_total = $data['grand_total'];
+
+    // Generate the PDF receipt using the extracted data
+    $pdf = \PDF::loadView('project.receipt', compact('data'), ['invoice_number'=>$invoice_number, 'client_id'=>$client_id, 'contact_address'=>$contact_address, 'nature_of_business'=>$nature_of_business, 'client_name'=>$client_name, 'invoice_date'=>$invoice_date, 'phone_number'=>$phone_number]);
+
+    // Stream the PDF to the HTTP response
+    return $pdf->stream();
+}
+
 
 
 
