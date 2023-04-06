@@ -106,9 +106,15 @@
     <div id="item-container">
       <div class="item">
         <table style="width:80%">
+            <tr>
+                <td>Equipment Serial Number</td>
+                <td style="width:40%">Equipment Name</td>
+                <td>Quantity</td>
+                <td>Cost</td>
+              </tr>
           <tr>
             <td><div class="mb-3 filled"><input type="text" name="equipment_serial_numbers[]" placeholder="Equipment Serial Number" class="form-control"></div></td>
-            <td style="width:50%"><div class="mb-3 filled"><input type="text" name="equipments[]" placeholder="Equipment Name" class="form-control"></div></td>
+            <td style="width:40%"><div class="mb-3 filled"><input type="text" name="equipments[]" placeholder="Equipment Name" class="form-control"></div></td>
             <td><div class="mb-3 filled"><input type="number" name="quantities[]" placeholder="Quantity" class="form-control"></div></td>
             <td><div class="mb-3 filled"><input type="number" name="costs[]" placeholder="Cost" class="form-control"></div></td>
           </tr>
@@ -121,7 +127,7 @@
       <span>Add Item</span>
     </button>
 
-    <button class="btn btn-lg btn-icon btn-icon-start btn-primary mb-1" type="submit">
+    <button class="btn btn-lg btn-icon btn-icon-start btn-secondary mb-1" type="submit">
       <i data-cs-icon="arrow-bottom-right"></i>
       <span>Submit</span>
     </button>
