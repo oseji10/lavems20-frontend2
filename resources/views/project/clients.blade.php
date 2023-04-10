@@ -57,6 +57,45 @@
                         {{--  --}}
                         </div>
                     </section>
+                    @if (session('success'))
+                    <div class="alert alert-success">
+                        <h4>{{ session('success') }}
+                            <button type="button" class="btn btn-outline-primary btn-icon btn-icon-end w-100 w-sm-auto"
+                            id="dashboardTourButton" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">
+                            <i data-cs-icon="plus"></i>
+                        <span>Generate Invoice</span>
+                    </button>
+                        </h4>
+                    </div>
+
+
+                                 <!-- Modal -->
+             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+             aria-labelledby="exampleModalLabelDefault" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelDefault">Search Client</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close">
+                            <!-- <i data-cs-icon="close"></i> -->
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="post" action="{{url('search-client')}}">
+                            @csrf
+                        <input class="form-control" type="text" placeholder="Enter Client ID, Phone Number or Email" name="id" required/>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Search Client</button>
+                        {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
+                @endif
 
                     <!-- Hoverable Rows Start -->
                     <section class="scroll-section" id="hoverableRows">

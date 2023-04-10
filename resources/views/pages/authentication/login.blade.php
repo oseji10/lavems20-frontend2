@@ -78,7 +78,7 @@
                     </div>
                     <button type="submit" class="btn btn-lg btn-primary">Login</button>
                 </form> --}}
-
+{{--
                 <form method="POST" action="{{ route('login.fire') }}">
                     @csrf
                     <div class="mb-3 filled form-group tooltip-end-top">
@@ -92,7 +92,58 @@
                            href="{{ url('/Pages/Authentication/ForgotPassword') }}">Forgot?</a>
                     </div>
                     <button type="submit" class="btn btn-lg btn-primary">Login</button>
+                </form> --}}
+
+                <form method="POST" action="{{ route('login.fire') }}">
+                    @csrf
+                    <div class="mb-3 filled form-group tooltip-end-top">
+                        <i data-cs-icon="email"></i>
+                        <input class="form-control" placeholder="Email" name="email" id="email" />
+                    </div>
+                    <div class="mb-3 filled form-group tooltip-end-top">
+                        <i data-cs-icon="lock-off"></i>
+                        <input class="form-control pe-7" name="password" type="password" placeholder="Password" id="password" />
+                        <a class="text-small position-absolute t-3 e-3" href="{{ url('/Pages/Authentication/ForgotPassword') }}">Forgot?</a>
+                    </div>
+                    <button type="submit" class="btn btn-lg btn-primary" id="login-btn">Login</button>
                 </form>
+                <script>
+                    const loginButton = document.getElementById('login-btn');
+                    const emailInput = document.getElementById('email');
+                    const passwordInput = document.getElementById('password');
+
+                    loginButton.addEventListener('click', (event) => {
+                        event.preventDefault();
+                        const email = emailInput.value;
+                        const password = passwordInput.value;
+
+                        fetch('http://localhost:8001/api/login', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                grant_type: 'password',
+                                client_id: 'client-id',
+                                client_secret: 'client-secret',
+                                username: email,
+                                password: password,
+                                scope: ''
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            // Store access token in local storage
+                            localStorage.setItem('access_token', data.access_token);
+
+                            // Redirect to secure page or do something else
+                            window.location.href = '/';
+                        })
+                        .catch(error => console.error(error));
+                    });
+                </script>
+
 
 
             </div>

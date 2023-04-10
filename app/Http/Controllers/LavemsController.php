@@ -29,6 +29,10 @@ public function load_invoices(){
     return view('project.invoices');
 }
 
+public function previewInvoice(){
+return view('project.preview-invoice');
+}
+
 public function test(Request $request){
     // Validate the request data
     // Log the input data
@@ -52,6 +56,7 @@ public function test(Request $request){
     $quantities = $request->input('quantities');
     $costs = $request->input('costs');
 
+    $message = '';
 
     // Loop through the input data and create a new invoice for each item
     foreach ($equipmentSerialNumbers as $key => $equipmentSerialNumber) {
@@ -73,21 +78,21 @@ public function test(Request $request){
 
             // Check if the response was successful and display a message
             if ($response->successful()) {
-                $message = 'Invoice added successfully.';
+                $message .= 'Invoice added successfully. Invoice Number: '.$invoice_number;
             } else {
-                $message = 'There was an error adding the invoice. Please try again.';
+                $message .= 'There was an error adding the invoice. Please try again. ';
             }
         } catch (\Exception $e) {
             // Log the error or display an error message
             Log::error('Error sending invoice to API: ' . $e->getMessage());
-            $message = 'There was an error adding the invoice. Please try again.';
+            $message .= 'There was an error adding the invoice. Please try again. ';
         }
     }
 
     // Redirect back with the message
-    return redirect()->back()->with('success', $message);
-    // return redirect()->route('/load_invoices', ['message' => $message]);
+    return redirect()->route('project.invoices')->with(['success' => $message]);
 }
+
 
 
     public function getClients(){
@@ -103,17 +108,6 @@ public function test(Request $request){
         return view('project.add-invoice');
      }
 
-    //  public function searchClient(Request $request){
-
-    //     $theUrl = config('app.guzzle_test_url').'/api/search-client/'.$request->id;
-    //     $response = Http::get($theUrl);
-
-    //     if ($response->successful()) {
-    //         return view('project.add-invoice', ['clients' => $response['client']]);
-    //     } else {
-    //         return redirect()->back()->withErrors(['Ooops! It appears the CLIENT does not exist. Please verify or use a different parameter']);
-    //     }
-    // }
 
 
     public function searchClient(Request $request){
@@ -138,7 +132,7 @@ public function test(Request $request){
         $theUrl     = config('app.guzzle_test_url').'/api/invoice/';
         $invoices   = Http ::get($theUrl)->collect();
         // return $clients;
-        return view('project.invoices', ['invoices' => $invoices]);
+        return view('project.invoices', ['invoices' => $invoices['invoice']]);
     }
 
 
@@ -152,87 +146,8 @@ public function test(Request $request){
         return view('project.payments', ['payments' => $payments]);
     }
 
-    // public function storeInvoice(Request $request){
-    //     {
-    //         // Validate the form data
-    //         $validatedData = $request->validate([
-    //             'equipment_serial_numbers.*' => 'required',
-    //             'equipments.*' => 'required',
-    //             'quantities.*' => 'required',
-    //         ]);
-
-    //         // Create an array to hold the items and quantities
-    //         $items = [];
-
-    //         // Loop through the items and quantities and add them to the array
-    //         foreach ($validatedData['items'] as $key => $item) {
-    //             $quantity = $validatedData['quantities'][$key];
-    //             $items[] = [
-    //                 'equipment_serial_numbers' => $equipment_serial_number,
-    //                 'equipments' => $equipment,
-    //                 'quantity' => $quantity,
-    //             ];
-    //         }
-
-    //         // Submit the data to the external API
-    //         // $response = Http::post('https://example.com/api/data', $data);
-    //         $response = Http::post(config('app.guzzle_test_url').'/api/client/', $items);
-
-    //         // Redirect the user back to the form with a success message
-    //         return redirect('/form')->with('success', 'Form submitted successfully!');
-    //     }
-    // }
-
-//     public function storeInvoice(Request $request)
-//     {
-//         // Validate the request data
-//         $request->validate([
-//             'client_id' => 'required',
-//             'equipment_serial_numbers.*' => 'required',
-//             'equipments.*' => 'required',
-//             'quantities.*' => 'required',
-//         ]);
-
-//         // Get the input data from the request
-//         $clientId = $request->input('client_id');
-//         $equipmentSerialNumbers = $request->input('equipment_serial_numbers');
-//         $equipments = $request->input('equipments');
-//         $quantities = $request->input('quantities');
-
-//         // \Log::info($clientId);
-// return $clientId;
-//         // Loop through the input data and create a new invoice for each item
-//         foreach ($equipmentSerialNumbers as $key => $equipmentSerialNumber) {
-//             $invoiceData = [
-//                 'client_id' => $clientId,
-//                 'equipment_serial_number' => $equipmentSerialNumber,
-//                 'equipment_name' => $equipments[$key],
-//                 'quantity' => $quantities[$key],
-//             ];
-
-//             // return "error";
-//             // Post the invoice data to the external API endpoint
-//             try {
-//                 $theUrl = config('app.guzzle_test_url') . '/api/invoice';
-//                 $response = Http::post($theUrl, $invoiceData);
 
 
-//                 // Check if the response was successful and display a message
-//                 if ($response->successful()) {
-//                     $message = 'Invoice added successfully.';
-//                 } else {
-//                     $message = 'There was an error adding the invoice. Please try again.';
-//                 }
-//             } catch (\Exception $e) {
-//                 // Log the error or display an error message
-//                 Log::error('Error sending invoice to API: ' . $e->getMessage());
-//                 $message = 'There was an error adding the invoice. Please try again.';
-//             }
-//         }
-
-//         // Redirect back with the message
-//         return redirect()->back()->with('message', $message);
-//     }
 
 
 public function storeInvoice(Request $request)
@@ -261,7 +176,7 @@ public function storeInvoice(Request $request)
 
             // Check if the response was successful and display a message
             if ($response->successful()) {
-                $message = 'Invoice added successfully.';
+                $message = 'Invoice added successfully. Invoice Number: '.$response['invoice'];
             } else {
                 $message = 'There was an error adding the invoice. Please try again.';
             }
@@ -273,7 +188,8 @@ public function storeInvoice(Request $request)
     }
 
     // Redirect back with the message
-    return redirect()->back()->with('message', $message);
+    return redirect()->route('project.invoices')->with(['success' => $message]);
+    // return redirect()->back()->with('message', $message);
 }
 
 
@@ -284,33 +200,45 @@ public function storeInvoice(Request $request)
 
      }
 
-     public function addClient(Request $request){
-        $theUrl     = config('app.guzzle_test_url').'/api/client/';
-        $response= Http::post($theUrl, [
-            'name'=>$request->name,
-            'email'=>$request->email,
-            'contact_address'=>$request->contact_address,
-            'phone_number'=>$request->phone_number,
-            'gender'=>$request->gender,
-            'state_of_residence'=>$request->state_of_residence,
-            'nature_of_business'=>$request->nature_of_business,
-            'edi_id'=>$request->edi_id,
-            'referred_by'=>$request->referred_by,
-            // 'registered_by'=>$request->registered_by
-        ]);
-        // return $response;
+     public function addClient(Request $request)
+     {
+         $theUrl = config('app.guzzle_test_url') . '/api/client/';
+         $response = Http::post($theUrl, [
+             'name' => $request->name,
+             'email' => $request->email,
+             'contact_address' => $request->contact_address,
+             'phone_number' => $request->phone_number,
+             'gender' => $request->gender,
+             'state_of_residence' => $request->state_of_residence,
+             'nature_of_business' => $request->nature_of_business,
+             'edi_id' => $request->edi_id,
+             'referred_by' => $request->referred_by,
+         ]);
 
-        if ($response->ok()) {
-            // return back()->withInput();
-            return redirect()->back()->with('success', 'Client Successfully captured');
-        // return redirect()->back()->success(['Successfully captured']);
+         if ($response->ok()) {
+             $client_id = $response['client']['client_id'];
+             $theUrl = config('app.guzzle_test_url') . '/api/client/';
+             $clients = Http::get($theUrl)->collect();
 
-        } else {
+             return redirect()->route('client.show')->with(
+                [
+                    'clients' => $clients,
+                    'success' => "Client successfully captured. Client ID is: $client_id",
+                ]
+             );
 
-            return redirect()->back()->withErrors(['There was an error. Please check form again']);
-        }
-
+            //  return view('project.clients')->with([
+            //      'clients' => $clients,
+            //      'success' => "Client successfully captured. Client ID is: $client_id",
+            //  ]);
+         } else {
+             return redirect()->back()->withErrors(['There was an error. Please check form again']);
+         }
      }
+
+
+
+
 
 
 
@@ -485,10 +413,10 @@ public function login(Request $request)
         $data = $response->json();
 
         // Store the user data in session
-        session()->put('user', $data['user']);
+        // session()->put('user', $data['user']);
 
         // Set the authorization token in the cookie
-        Cookie::queue('Authorization', 'Bearer ' . $data['authorisation']['token'], 60 * 24 * 30);
+        // Cookie::queue('Authorization', 'Bearer ' . $data['authorisation']['token'], 60 * 24 * 30);
 
         return redirect('/Dashboards/Default');
     } else {

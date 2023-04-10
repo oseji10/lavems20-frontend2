@@ -94,6 +94,11 @@
             </ul>
         </div>
     @endif
+    @if (session('success'))
+    <div class="alert alert-success">
+        <h4>{{ session('success') }}</h4>
+    </div>
+    @endif
 
                     <!-- Hoverable Rows Start -->
 
@@ -108,7 +113,7 @@
                                                       <th scope="col">Client ID</th>
                                                       <th scope="col">Client Name</th>
                                                       <th scope="col">Email</th>
-                                                      <th scope="col">Total Cost</th>
+                                                      {{-- <th scope="col">Total Cost</th> --}}
                                                       <th scope="col">Invoiced By</th>
                                                       <th scope="col">Invoice Date</th>
                                                       <th></th>
@@ -123,7 +128,7 @@
                                                       <td>{{$data['client_id'] ?? null}}</td>
                                                       <td style="text-transform:uppercase">{{$data['name'] ?? null}}</td>
                                                       <td>{{$data['email'] ?? null}}</td>
-                                                      <td>&#8358;{{ number_format($data['total'] ?? null, 2) }}</td>
+                                                      {{-- <td>&#8358;{{ number_format($data['grand_total'] ?? null, 2) }}</td> --}}
                                                       <td>{{$data['full_name'] ?? null}}</td>
                                                       <td>{{ Carbon\Carbon::parse($data['created_at'])->format('D, d-m-Y ') }}</td>
                                                       <td>

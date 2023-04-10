@@ -69,7 +69,7 @@
                         {{-- <h2 class="small-title">Filled</h2> --}}
                         <div class="card mb-5">
                             <div class="card-body">
-                                <form method="post" action="{{url('/add-client')}}">
+                                <form method="post" action="{{url('/add-client')}}" onsubmit="disableSubmitButton()">
                                 @csrf
 
                                 {{-- @if (session('status'))
@@ -84,7 +84,7 @@
                                         <li>{{ \Session::get('success') }}</li>
                                     </ul>
                                 </div>
-                            @endif
+                                @endif
 
                                     <div class="mb-3 filled">
                                         <i data-cs-icon="user"></i>
@@ -132,6 +132,8 @@
                                         <i data-cs-icon="file-text"></i>
                                         <select class="form-control" id="select2Filled2" data-placeholder="State Of Residence" name="state_of_residence" required>
                                             <option label="State of Residence"></option>
+                                            <option value="" selected="selected">- Select -</option>
+                                            <option value="FCT-Abuja">FCT-Abuja</option>
                                             <option value="Abia">Abia</option>
                                             <option value="Adamawa">Adamawa</option>
                                             <option value="Akwa Ibom">Akwa Ibom</option>
@@ -140,6 +142,36 @@
                                             <option value="Bayelsa">Bayelsa</option>
                                             <option value="Benue">Benue</option>
                                             <option value="Borno">Borno</option>
+                                            <option value="Cross River">Cross River</option>
+                                            <option value="Delta">Delta</option>
+                                            <option value="Ebonyi">Ebonyi</option>
+                                            <option value="Edo">Edo</option>
+                                            <option value="Ekiti">Ekiti</option>
+                                            <option value="Enugu">Enugu</option>
+                                            <option value="Gombe">Gombe</option>
+                                            <option value="Imo">Imo</option>
+                                            <option value="Jigawa">Jigawa</option>
+                                            <option value="Kaduna">Kaduna</option>
+                                            <option value="Kano">Kano</option>
+                                            <option value="Katsina">Katsina</option>
+                                            <option value="Kebbi">Kebbi</option>
+                                            <option value="Kogi">Kogi</option>
+                                            <option value="Kwara">Kwara</option>
+                                            <option value="Lagos">Lagos</option>
+                                            <option value="Nassarawa">Nassarawa</option>
+                                            <option value="Niger">Niger</option>
+                                            <option value="Ogun">Ogun</option>
+                                            <option value="Ondo">Ondo</option>
+                                            <option value="Osun">Osun</option>
+                                            <option value="Oyo">Oyo</option>
+                                            <option value="Plateau">Plateau</option>
+                                            <option value="Rivers">Rivers</option>
+                                            <option value="Sokoto">Sokoto</option>
+                                            <option value="Taraba">Taraba</option>
+                                            <option value="Yobe">Yobe</option>
+                                            <option value="Zamfara">Zamfara</option>
+                                   <option value="Outside Nigeria">Outside Nigeria</option>
+                                          </select>
 
                                         </select>
                                     </div>
@@ -210,8 +242,15 @@
                                                id="datePickerFilled"/>
                                     </div> --}}
 
-                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                    <button class="btn btn-primary" type="submit" id="submit-btn">Submit</button>
                                 </form>
+                                <script>
+                                    function disableSubmitButton() {
+                                      document.getElementById("submit-btn").disabled = true;
+                                      document.getElementById("submit-btn").innerHTML = "Submitting...";
+                                    }
+                                    </script>
+
                             </div>
                         </div>
                     </section>

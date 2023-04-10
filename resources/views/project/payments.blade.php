@@ -108,8 +108,8 @@
                                         <th scope="col">Client ID</th>
                                         <th scope="col">Client Name</th>
                                         {{-- <th scope="col">Email</th> --}}
-                                        <th scope="col">Total Cost</th>
-                                        <th scope="col">Processed By</th>
+                                        {{-- <th scope="col">Total Cost</th> --}}
+                                        {{-- <th scope="col">Processed By</th> --}}
                                         <th scope="col">Processed Date</th>
                                         <th></th>
                                     </tr>
@@ -126,8 +126,8 @@
                                         <td>{{$data['client_id'] ?? null}}</td>
                                         <td style="text-transform:uppercase">{{$data['name'] ?? null}}</td>
                                         {{-- <td>{{$data['email'] ?? null}}</td> --}}
-                                        <td>&#8358;{{ number_format($data['total'] ?? null, 2) }}</td>
-                                        <td>{{$data['user']['full_name'] ?? null}}</td>
+                                        {{-- <td>&#8358;{{ number_format($data['total'] ?? null, 2) }}</td> --}}
+                                        {{-- <td>{{$data['user']['full_name'] ?? null}}</td> --}}
                                         <td>{{ Carbon\Carbon::parse($data['created_at'])->format('D, d-m-Y ') }}</td>
                                         <td>
                                             <a target="_blank" href="/print_receipt?id={{$data['invoice_number']}}"><i data-cs-icon="print"></i></a>
