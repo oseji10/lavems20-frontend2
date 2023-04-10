@@ -70,13 +70,10 @@
                         <div class="card mb-5">
                             <div class="card-body">
                                 <form method="post" action="{{url('/add-client')}}" onsubmit="disableSubmitButton()">
-                                @csrf
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                    <input type="hidden" name="_token_input" id="_token_input">
 
-                                {{-- @if (session('status'))
-                                <div class="alert alert-success">
-                                {{ session('status') }}
-                                </div>
-                                @endif --}}
+
 
                                 @if (\Session::has('success'))
                                 <div class="alert alert-success">
@@ -224,24 +221,6 @@
                                          </select>
                                     </div>
 
-
-                                    {{-- <div class="mb-3 filled">
-                                        <i data-cs-icon="user"></i>
-                                        <input class="form-control" type="text" placeholder="EDI Name" name="edi"/>
-                                    </div> --}}
-
-
-{{--
-                                    <div class="mb-3 filled w-100">
-                                        <i data-cs-icon="tag"></i>
-                                        <input id="tagsFilled" placeholder="Tags"/>
-                                    </div> --}}
-                                    {{-- <div class="mb-3 filled">
-                                        <i data-cs-icon="calendar"></i>
-                                        <input type="text" class="form-control" placeholder="Date"
-                                               id="datePickerFilled"/>
-                                    </div> --}}
-
                                     <button class="btn btn-primary" type="submit" id="submit-btn">Submit</button>
                                 </form>
                                 <script>
@@ -315,6 +294,12 @@
                 </div>
                 <!-- Content End -->
             </div>
+
+
+            <script>
+                document.getElementById("_token_input").value = document.querySelector('input[name="_token"]').value;
+              </script>
+
 
                </div>
     </div>

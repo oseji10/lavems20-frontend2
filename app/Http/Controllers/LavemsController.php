@@ -217,6 +217,7 @@ public function storeInvoice(Request $request)
              'nature_of_business' => $request->nature_of_business,
              'edi_id' => $request->edi_id,
              'referred_by' => $request->referred_by,
+             'token' => $request->input('_token_input'),
          ]);
         //  dd($response->json());
 return "Success";
