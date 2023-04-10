@@ -218,6 +218,7 @@ Route::prefix('Interface')->group(function () {
     });
 });
 
+Route::get('/display-clients', [LavemsController::class, 'allClients'])->name('client.all');
 Route::get('/clients', [LavemsController::class, 'getClients'])->name('client.show');
 Route::get('/client-form', [LavemsController::class, 'showClientForm'])->name('show.client');
 Route::post('/add-client', [LavemsController::class, 'addClient'])->name('client.add');

@@ -29,6 +29,10 @@ public function load_invoices(){
     return view('project.invoices');
 }
 
+public function allClients(){
+    return view('project.clients');
+}
+
 public function previewInvoice(){
 return view('project.preview-invoice');
 }
