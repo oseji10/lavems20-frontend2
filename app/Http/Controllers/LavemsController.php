@@ -216,7 +216,7 @@ public function storeInvoice(Request $request)
          ]);
 
          if ($response->ok()) {
-             $client_id = $response['client']['client_id'];
+             $client_id = $response['clients']['client_id'];
              $theUrl = config('app.guzzle_test_url') . '/api/client/';
              $clients = Http::get($theUrl)->collect();
 
@@ -226,11 +226,6 @@ public function storeInvoice(Request $request)
                     'success' => "Client successfully captured. Client ID is: $client_id",
                 ]
              );
-
-            //  return view('project.clients')->with([
-            //      'clients' => $clients,
-            //      'success' => "Client successfully captured. Client ID is: $client_id",
-            //  ]);
          } else {
              return redirect()->back()->withErrors(['There was an error. Please check form again']);
          }
