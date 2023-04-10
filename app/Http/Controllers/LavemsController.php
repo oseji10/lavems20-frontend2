@@ -253,7 +253,8 @@ public function addClient(Request $request)
         'referred_by' => $request->referred_by,
     ]);
 
-    Log::info($response->status());
+    // Log::info($response->status());
+    \Log::info($response);
     if ($response->successful()) {
         return "Success";
     } else {
