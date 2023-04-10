@@ -219,20 +219,20 @@ public function storeInvoice(Request $request)
              'referred_by' => $request->referred_by,
          ]);
         //  dd($response->json());
-
-         if ($response->ok()) {
-            $client_id = $response['clients'][0]['client_id'];
-            $theUrl = config('app.guzzle_test_url') . '/api/client/';
-            $clients = Http::get($theUrl)->collect();
-            return redirect()->route('client.show')->with(
-                [
-                    'clients' => $clients,
-                    'success' => "Client successfully captured. Client ID is: $client_id",
-                ]
-            );
-        } else {
-            return redirect()->back()->withErrors(['There was an error. Please check form again']);
-        }
+return "Success";
+        //  if ($response->ok()) {
+        //     $client_id = $response['clients'][0]['client_id'];
+        //     $theUrl = config('app.guzzle_test_url') . '/api/client/';
+        //     $clients = Http::get($theUrl)->collect();
+        //     return redirect()->route('client.show')->with(
+        //         [
+        //             'clients' => $clients,
+        //             'success' => "Client successfully captured. Client ID is: $client_id",
+        //         ]
+        //     );
+        // } else {
+        //     return redirect()->back()->withErrors(['There was an error. Please check form again']);
+        // }
 
      }
 
