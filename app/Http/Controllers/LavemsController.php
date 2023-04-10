@@ -243,14 +243,14 @@ public function addClient(Request $request)
     $theUrl = config('app.guzzle_test_url') . '/api/client/';
     $response = Http::post($theUrl, [
         'name' => $request->name,
-        'email' => $request->email,
-        'contact_address' => $request->contact_address,
-        'phone_number' => $request->phone_number,
-        'gender' => $request->gender,
-        'state_of_residence' => $request->state_of_residence,
-        'nature_of_business' => $request->nature_of_business,
-        'edi_id' => $request->edi_id,
-        'referred_by' => $request->referred_by,
+        // 'email' => $request->email,
+        // 'contact_address' => $request->contact_address,
+        // 'phone_number' => $request->phone_number,
+        // 'gender' => $request->gender,
+        // 'state_of_residence' => $request->state_of_residence,
+        // 'nature_of_business' => $request->nature_of_business,
+        // 'edi_id' => $request->edi_id,
+        // 'referred_by' => $request->referred_by,
     ]);
 
     if ($response->successful()) {
