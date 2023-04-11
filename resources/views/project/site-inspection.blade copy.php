@@ -102,8 +102,8 @@ padding: 5px 5px 5px 5px;
                 </tr>
             </table>
         </span></p>
-        <h1 style="padding-top: 5pt;padding-left: 200pt;text-indent: 0pt;text-align: center;">Date<span>: {{ now()->format('d-m-Y') }}</span>
-        </h1>
+    <h1 style="padding-top: 5pt;padding-left: 200pt;text-indent: 0pt;text-align: center;">Date<span class="h3">:</span>
+    </h1>
     <h2 style="padding-top: 10pt;padding-left: 26pt;text-indent: 0pt;text-align: left;">SITE/EQUIPMENT INSPECTION REPORT
     </h2>
     <p style="padding-top: 9pt;padding-left: 26pt;text-indent: 0pt;text-align: left;">Branch:</p>

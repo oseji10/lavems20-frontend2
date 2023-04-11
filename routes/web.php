@@ -242,6 +242,7 @@ Route::post('receipt', [LavemsController::class,'clientReceipt'])->name('print.r
 Route::get('/print_invoice', [LavemsController::class,'clientInvoice']);
 Route::get('/print_receipt', [LavemsController::class,'clientReceipt']);
 Route::post('/site-inspection', [LavemsController::class,'siteInspection']);
+Route::post('/release-of-funds', [LavemsController::class,'releaseOfFunds']);
 
 Route::post('preview-invoice', [LavemsController::class, 'previewInvoice'])->name('preview.invoice');
 // Route::get('/create-symlink', function (){
