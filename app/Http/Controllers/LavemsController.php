@@ -204,8 +204,7 @@ public function storeInvoice(Request $request)
 
      }
 
-     public function addClient(Request $request)
-     {
+     public function addClient(Request $request){
          $theUrl = config('app.guzzle_test_url') . '/api/client/';
          $response = Http::post($theUrl, [
              'name' => $request->name,
@@ -223,7 +222,7 @@ public function storeInvoice(Request $request)
          if ($response->ok()) {
             $client_id = $response['clients'][0]['client_id'];
             $theUrl = config('app.guzzle_test_url') . '/api/client/';
-            $clients = Http::get($theUrl)->collect();
+            $clients = Http::get($theUrl);
             return redirect()->route('client.show')->with(
                 [
                     'clients' => $clients,

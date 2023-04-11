@@ -69,11 +69,14 @@
                         {{-- <h2 class="small-title">Filled</h2> --}}
                         <div class="card mb-5">
                             <div class="card-body">
-                                <form method="post" action="{{url('/add-client')}}" onsubmit="disableSubmitButton()">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="hidden" name="_token_input" id="_token_input">
+                                <form method="post" action="{{url('/add-client')}}">
+                                @csrf
 
-
+                                {{-- @if (session('status'))
+                                <div class="alert alert-success">
+                                {{ session('status') }}
+                                </div>
+                                @endif --}}
 
                                 @if (\Session::has('success'))
                                 <div class="alert alert-success">
@@ -81,7 +84,7 @@
                                         <li>{{ \Session::get('success') }}</li>
                                     </ul>
                                 </div>
-                                @endif
+                            @endif
 
                                     <div class="mb-3 filled">
                                         <i data-cs-icon="user"></i>
@@ -221,15 +224,26 @@
                                          </select>
                                     </div>
 
-                                    <button class="btn btn-primary" type="submit" id="submit-btn">Submit</button>
-                                </form>
-                                <script>
-                                    function disableSubmitButton() {
-                                      document.getElementById("submit-btn").disabled = true;
-                                      document.getElementById("submit-btn").innerHTML = "Submitting...";
-                                    }
-                                    </script>
 
+                                    {{-- <div class="mb-3 filled">
+                                        <i data-cs-icon="user"></i>
+                                        <input class="form-control" type="text" placeholder="EDI Name" name="edi"/>
+                                    </div> --}}
+
+
+{{--
+                                    <div class="mb-3 filled w-100">
+                                        <i data-cs-icon="tag"></i>
+                                        <input id="tagsFilled" placeholder="Tags"/>
+                                    </div> --}}
+                                    {{-- <div class="mb-3 filled">
+                                        <i data-cs-icon="calendar"></i>
+                                        <input type="text" class="form-control" placeholder="Date"
+                                               id="datePickerFilled"/>
+                                    </div> --}}
+
+                                    <button class="btn btn-primary" type="submit">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </section>
@@ -239,67 +253,13 @@
 
                     <!-- Horizontal Form End -->
 
-             <!--Generate Invoice Modal -->
-             <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabelDefault" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabelDefault">Search Client</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close">
-                            <!-- <i data-cs-icon="close"></i> -->
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="post" action="{{url('search-client')}}">
-                            @csrf
-                        <input class="form-control" type="text" placeholder="Enter Client ID, Phone Number or Email" name="id" required/>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Search Client</button>
-                        {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
-                    </div>
-                </form>
-                </div>
-            </div>
-        </div>
 
 
-                                 <!-- Print Receipt Modal -->
-                         <div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabelDefault">Print Receipt</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close">
-                                            <!-- <i data-cs-icon="close"></i> -->
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form method="post" action="{{url('/receipt')}}">
-                                            @csrf
-                                        <input class="form-control" type="text" placeholder="Enter Invoice Number" name="id" required/>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">Print Receipt</button>
 
-                                    </div>
-                                </form>
-                                </div>
-                            </div>
-                        </div>
 
                 </div>
                 <!-- Content End -->
             </div>
-
-
-            <script>
-                document.getElementById("_token_input").value = document.querySelector('input[name="_token"]').value;
-              </script>
-
 
                </div>
     </div>
