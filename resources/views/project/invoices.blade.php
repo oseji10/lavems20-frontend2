@@ -113,6 +113,33 @@
                                 </div>
 
 
+
+               <!-- Print Site Inspection Modal -->
+               <div class="modal fade" id="siteInspectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabelDefault">Print Site Inspection Form</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                <!-- <i data-cs-icon="close"></i> -->
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" action="{{url('/site-inspection')}}">
+                                @csrf
+                            <input class="form-control" type="text" placeholder="Enter Invoice Number" name="id" required/>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Print </button>
+
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+
+
         @if ($errors->any())
         <div class="alert alert-danger">
             <ul>

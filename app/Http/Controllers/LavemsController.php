@@ -392,7 +392,70 @@ public function clientReceipt2(Request $request)
 
 
 
+public function siteInspection(Request $request)
+{
+    // Make a GET request to an external API to get invoice data
+    $theUrl = config('app.guzzle_test_url').'/api/site-inspection/'.$request->id;
+    $response = Http::get($theUrl);
 
+    // Check if the response is successful
+    if (!$response->ok()) {
+        return redirect()->back()->withErrors(['There was an error. Please check form again']);
+    }
+
+    // Decode the JSON response and check if it contains the required data
+    $data = json_decode($response->body(), true);
+    if (!isset($data['receipt'])) {
+        return redirect()->back()->withErrors(['No data returned from the API']);
+    }
+
+    // Extract the required data from the response
+    $receipts = $data['receipt'];
+    $invoice_number = '';
+    $client_id = '';
+    $contact_address = '';
+    $nature_of_business = '';
+    $client_name = '';
+    $invoice_date = '';
+    $phone_number = '';
+    foreach ($receipts as $receipt) {
+        if (isset($receipt['invoice_number'])) {
+            $invoice_number = $receipt['invoice_number'];
+        }
+        if (isset($receipt['client_id'])) {
+            $client_id = $receipt['client_id'];
+        }
+        if (isset($receipt['contact_address'])) {
+            $contact_address = $receipt['contact_address'];
+        }
+        if (isset($receipt['nature_of_business'])) {
+            $nature_of_business = $receipt['nature_of_business'];
+        }
+        if (isset($receipt['name'])) {
+            $client_name = $receipt['name'];
+        }
+        if (isset($receipt['created_at'])) {
+            $invoice_date = $receipt['created_at'];
+        }
+        if (isset($receipt['phone_number'])) {
+            $phone_number = $receipt['phone_number'];
+        }
+    }
+
+    // Check if the invoice number is present
+    if (empty($invoice_number)) {
+        return redirect()->back()->withErrors(['Sorry! This invoice number does not exist']);
+    }
+
+    // Get the grand total from the response data
+    $grand_total = $data['grand_total'];
+
+    // Generate the PDF receipt using the extracted data
+    $pdf = \PDF::loadView('project.site-inspection', compact('data'), ['invoice_number'=>$invoice_number, 'client_id'=>$client_id, 'contact_address'=>$contact_address, 'nature_of_business'=>$nature_of_business, 'client_name'=>$client_name, 'invoice_date'=>$invoice_date, 'phone_number'=>$phone_number]);
+
+    // Stream the PDF to the HTTP response
+    return $pdf->stream();
+}
 
 
 
