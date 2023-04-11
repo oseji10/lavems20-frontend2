@@ -205,7 +205,7 @@ public function storeInvoice(Request $request)
      }
 
      public function addClient(Request $request){
-         $theUrl = config('app.guzzle_test_url') . '/api/client/';
+         $theUrl = config('app.guzzle_test_url') . '/api/client';
          $response = Http::post($theUrl, [
              'name' => $request->name,
              'email' => $request->email,
