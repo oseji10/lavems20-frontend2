@@ -246,7 +246,4 @@ Route::post('/site-inspection', [LavemsController::class,'siteInspection']);
 Route::post('/release-of-funds', [LavemsController::class,'releaseOfFunds']);
 
 Route::post('preview-invoice', [LavemsController::class, 'previewInvoice'])->name('preview.invoice');
-// Route::get('/create-symlink', function (){
-//     symlink(storage_path('/app/public'), public_path('storage'));
-//     echo "Symlink Created. Thanks";
-// });
+
