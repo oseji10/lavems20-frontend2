@@ -986,7 +986,11 @@
         </ul>
     </div>
 
-
+    <ul>JJJJ
+        @if (session('user'))
+        <p>Welcome, {{ session('user')['name'] }}</p>
+      @endif
+    </ul>
     <!-- Menu End -->
     <!-- Mobile Buttons Start -->
     <div class="mobile-buttons-container">

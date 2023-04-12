@@ -94,7 +94,7 @@
                     <button type="submit" class="btn btn-lg btn-primary">Login</button>
                 </form> --}}
 
-                <form method="POST" action="{{ route('login.fire') }}">
+                <form id="login-form">
                     @csrf
                     <div class="mb-3 filled form-group tooltip-end-top">
                         <i data-cs-icon="email"></i>
@@ -107,7 +107,10 @@
                     </div>
                     <button type="submit" class="btn btn-lg btn-primary" id="login-btn">Login</button>
                 </form>
-                <script>
+
+                <script src="{{ asset('js/auth.js') }}"></script>
+
+                {{-- <script>
                     const loginButton = document.getElementById('login-btn');
                     const emailInput = document.getElementById('email');
                     const passwordInput = document.getElementById('password');
@@ -142,7 +145,7 @@
                         })
                         .catch(error => console.error(error));
                     });
-                </script>
+                </script> --}}
 
 
 

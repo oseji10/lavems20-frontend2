@@ -46,7 +46,16 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+
+        'guards' => [
+            'jwt' => [
+                'driver' => 'jwt',
+                'provider' => 'users',
+            ],
+        ],
+
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -66,15 +75,15 @@ return [
     */
 
     'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
-        ],
-
         // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
+        //     'driver' => 'eloquent',
+        //     'model' => App\Models\User::class,
         // ],
+
+        'users' => [
+            'driver' => 'database',
+            'table' => 'users',
+        ],
     ],
 
     /*
