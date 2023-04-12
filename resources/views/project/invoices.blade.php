@@ -49,7 +49,7 @@
 
                             <button type="button" class="btn btn-outline-primary btn-icon btn-icon-end w-100 w-sm-auto"
                                     id="dashboardTourButton" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
+                                    data-bs-target="#exampleModal2">
                                     <i data-cs-icon="plus"></i>
                                 <span>Generate Invoice</span>
                             </button>
@@ -61,8 +61,7 @@
 
 
              <!-- Modal -->
-             <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
-             aria-labelledby="exampleModalLabelDefault" aria-hidden="true">
+             <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelDefault" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -86,6 +85,31 @@
             </div>
         </div>
 
+
+                                          <!-- Print Invoice Modal -->
+                                          <div class="modal fade" id="printInvoiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabelDefault">Print Invoice</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <!-- <i data-cs-icon="close"></i> -->
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <form method="post" action="{{url('/invoice')}}">
+                                                            @csrf
+                                                        <input class="form-control" type="text" placeholder="Enter Invoice Number" name="id" required/>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">Print Invoice</button>
+
+                                                    </div>
+                                                </form>
+                                                </div>
+                                            </div>
+                                        </div>
 
                                   <!-- Print Receipt Modal -->
                                   <div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

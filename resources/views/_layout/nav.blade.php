@@ -252,6 +252,11 @@
                 </li>
 
                 <li>
+                    <a href="#" id="dashboardTourButton" data-bs-toggle="modal" data-bs-target="#printInvoiceModal">
+                    <span>Print Invoice</span></a>
+                </li>
+
+                <li>
                     <a href="#" id="dashboardTourButton" data-bs-toggle="modal" data-bs-target="#siteInspectionModal">
                     <span>Print Site Inspection</span></a>
                 </li>
