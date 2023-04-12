@@ -60,6 +60,134 @@
             </div>
         </div>
         <!-- Title and Top Buttons End -->
+   <!-- Invoice Print Modal -->
+   <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelDefault" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabelDefault">Search Client</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close">
+                    <!-- <i data-cs-icon="close"></i> -->
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="{{url('search-client')}}">
+                    @csrf
+                <input class="form-control" type="text" placeholder="Enter Client ID, Phone Number or Email" name="id" required/>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Search Client</button>
+                {{-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> --}}
+            </div>
+        </form>
+        </div>
+    </div>
+</div>
+
+
+                                  <!-- Print Invoice Modal -->
+                                  <div class="modal fade" id="printInvoiceModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabelDefault">Print Invoice</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <!-- <i data-cs-icon="close"></i> -->
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post" action="{{url('/invoice')}}">
+                                                    @csrf
+                                                <input class="form-control" type="text" placeholder="Enter Invoice Number" name="id" required/>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="submit" class="btn btn-primary">Print Invoice</button>
+
+                                            </div>
+                                        </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                          <!-- Print Receipt Modal -->
+                          <div class="modal fade" id="receiptModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabelDefault">Print Receipt</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                            <!-- <i data-cs-icon="close"></i> -->
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form method="post" action="{{url('/receipt')}}">
+                                            @csrf
+                                        <input class="form-control" type="text" placeholder="Enter Invoice Number" name="id" required/>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Print Receipt</button>
+
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+       <!-- Print Site Inspection Modal -->
+       <div class="modal fade" id="siteInspectionModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabelDefault">Print Site Inspection Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close">
+                        <!-- <i data-cs-icon="close"></i> -->
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="{{url('/site-inspection')}}">
+                        @csrf
+                    <input class="form-control" type="text" placeholder="Enter Invoice Number" name="id" required/>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Print </button>
+
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
+
+
+                    <!-- Print Release of Funds Modal -->
+                    <div class="modal fade" id="releaseOfFundsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabelDefault">Print Release of Funds Form</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                        <!-- <i data-cs-icon="close"></i> -->
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form method="post" action="{{url('/release-of-funds')}}">
+                                        @csrf
+                                    <input class="form-control" type="text" placeholder="Enter Invoice Number" name="id" required/>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary">Print </button>
+
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
 
         <div class="row">
             <div class="col-12 col-xl-6">
