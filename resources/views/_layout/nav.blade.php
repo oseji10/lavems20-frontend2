@@ -214,10 +214,10 @@
                         </a>
                     </li> --}}
                     <li>
-                        {{-- <a href="/clients">
+                        <a href="/clients">
                             <span class="label">See All Clients</span>
                         </a>
-                    </li> --}}
+                    </li>
 
                     <li>
                         <a href="#" id="dashboardTourButton" data-bs-toggle="modal" data-bs-target="#searchPatient">
