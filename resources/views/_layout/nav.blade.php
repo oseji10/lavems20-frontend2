@@ -30,8 +30,9 @@
            aria-expanded="false">
             <img class="profile" alt="profile" src="{{ asset('/img/profile/profile-9.jpg') }}"/>
 
-            <div class="name" style="font-weight:bold; font-size:14pt;">Hi, {{session('user.first_name')}} {{session('user.last_name')}}</div>
+            <div class="name" style="font-weight:bold; font-size:14pt;">Hi, <span id="first_name"></span> &nbsp;<span id="last_name"></span></div>
         </a>
+        <script src="{{ asset('js/auth2.js') }}"></script>
         <div class="dropdown-menu dropdown-menu-end user-menu wide">
             {{-- <div class="row mb-3 ms-0 me-0">
                 <div class="col-12 ps-1 mb-2">
@@ -114,21 +115,16 @@
                                 <span class="align-middle">Settings</span>
                             </a>
                         </li>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-primary">Logout</button>
-                        </form>
 
-                        <script>
-                            $(document).ready(function() {
-                                $('#logout-form').submit(function(event) {
-                                    event.preventDefault();
-                                    $.post($(this).attr('action'), $(this).serialize(), function() {
-                                        window.location.href = '/Pages/Authentication/Login'; // Redirect to login page
-                                    });
-                                });
-                            });
-                        </script>
+                        <li>
+                            <a href="#">
+                                <i data-cs-icon="logout" class="me-2" data-cs-size="17"></i>
+                                <span class="align-middle" id="logout-button">Logout</span>
+                            </a>
+                        </li>
+
+                        <script src="{{ asset('js/logout.js') }}"></script>
+
                     </ul>
                 </div>
             </div>
@@ -989,12 +985,10 @@
             </li>
         </ul>
     </div>
-
-    <ul>JJJJ
-        @if (session('user'))
-        <p>Welcome, {{ session('user')['name'] }}</p>
-      @endif
+    {{-- <ul>
+        <span>Welcome, <span id="first_name"></span>!</span>
     </ul>
+    <script src="{{ asset('js/auth2.js') }}"></script> --}}
     <!-- Menu End -->
     <!-- Mobile Buttons Start -->
     <div class="mobile-buttons-container">

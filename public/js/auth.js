@@ -29,6 +29,7 @@ form.addEventListener('submit', (event) => {
           localStorage.setItem('user', JSON.stringify(user));
           // Add this line to store user data in the session
           sessionStorage.setItem('user', JSON.stringify(user));
+        //   sessionStorage.setItem('user', JSON.stringify(user));
           window.location = `/Dashboards/Default`;
         })
         .catch(error => console.error(error));
@@ -36,16 +37,16 @@ form.addEventListener('submit', (event) => {
     .catch(error => console.error(error));
 });
 
-if (localStorage.getItem('token')) {
-    const token = localStorage.getItem('token');
-    fetch(API_BASE_URL + 'api/user', {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    })
-    .then(response => response.json())
-    .then(data => {
-        localStorage.setItem('user', JSON.stringify(data));
-    })
-    .catch(error => console.error(error));
-}
+// if (localStorage.getItem('token')) {
+//     const token = localStorage.getItem('token');
+//     fetch(API_BASE_URL + 'api/user', {
+//         headers: {
+//             'Authorization': `Bearer ${token}`
+//         }
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         localStorage.setItem('user', JSON.stringify(data));
+//     })
+//     .catch(error => console.error(error));
+// }
