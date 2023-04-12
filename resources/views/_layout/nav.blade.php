@@ -1,4 +1,4 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script> --}}
 
 <div class="nav-content d-flex">
     <!-- Logo Start -->
@@ -220,9 +220,8 @@
                     </li> --}}
 
                     <li>
-                        <a href="/clients">
-                            <span class="label">Search Clients</span>
-                        </a>
+                        <a href="#" id="dashboardTourButton" data-bs-toggle="modal" data-bs-target="#searchPatient">
+                        <span>Search Client</span></a>
                     </li>
 
                     <li>

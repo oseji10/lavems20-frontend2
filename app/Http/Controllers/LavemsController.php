@@ -98,6 +98,10 @@ public function test(Request $request){
 }
 
 
+public function addInvoice(){
+
+   return view('project.add-invoice');
+}
 
     public function getClients(){
 
@@ -107,10 +111,30 @@ public function test(Request $request){
         return view('project.clients', ['clients' => $clients]);
      }
 
-     public function addInvoice(){
 
-        return view('project.add-invoice');
-     }
+    //  public function getAllClients(Request $request){
+
+    //     $theUrl     = config('app.guzzle_test_url').'/api/client/'.$request->id;
+    //     $clients   = Http ::get($theUrl)->collect();
+    //     // return $clients;
+    //     return view('project.client-search', ['clients' => $clients]);
+    //  }
+
+
+    public function getAllClients(Request $request){
+        $theUrl = config('app.guzzle_test_url') . '/api/client/' . $request->id;
+        $response = Http::get($theUrl);
+
+        if ($response->successful()) {
+            $clients = $response->collect();
+            return view('project.client-search', ['clients' => $clients]);
+        } else {
+            $errorMessage = $response->json()['message'];
+            return view('project.client-search', ['errorMessage' => $errorMessage]);
+        }
+    }
+
+
 
 
 

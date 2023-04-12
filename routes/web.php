@@ -235,6 +235,7 @@ Route::post('/invoice', [LavemsController::class, 'test'])->name('invoice.test')
 // Route::post('/test', [LavemsController::class, 'test'])->name('invoice.test');
 
 Route::post('search-client', [LavemsController::class, 'searchClient'])->name('query-client');
+Route::post('client', [LavemsController::class, 'getAllClients'])->name('get-client');
 
 Route::get('/payments', [LavemsController::class, 'getPayments']);
 
