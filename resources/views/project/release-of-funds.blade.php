@@ -163,52 +163,26 @@ padding: 5px 5px 5px 5px;
 
     </table>
 
-    <table style="width:100%; border:1px;">
+    <?php $i='1'; ?>
+    <table style="width:100%; border:1px; border-spacing: 15px">
         <tr style="padding-top: 9pt;padding-left: 26pt;text-indent: 0pt;line-height: 178%;text-align: left;">
-            <td width="10%"></td><td></td>
-            <td width="40%">List of Equipment on Site:</td><td></td>
-            <td width="40%">Serial Number of Equipment:</td><td></td>
+            <td width="10%"></td>
+            {{-- <td></td> --}}
+            <td width="40%">List of Equipment on Site:</td>
+            {{-- <td></td> --}}
+            <td width="40%">Serial Number of Equipment:</td>
+            {{-- <td></td> --}}
         </tr>
 
-        <tr style="padding-top: 9pt;padding-left: 26pt;text-indent: 0pt;line-height: 178%;text-align: left;">
-            <td width="4%">1.</td><td></td>
-            <td width="48%">-----------------------------------------------------------------</td><td></td>
-            <td width="48%">-----------------------------------------------------------------</td><td></td>
+        @foreach ($data['receipt'] as $item)
+        <tr>
+            <td width="4%"><?php  echo $i++; ?>.</td>
+
+            <td width="48%" style="text-decoration: none; border-bottom:1px dotted; ">{{ $item['equipment_serial_number'] ?? 'N/A' }}</td>
+            <td width="48%" style="text-decoration: none; border-bottom:1px dotted;">{{ $item['equipment'] ?? 'N/A' }}</td>
+
         </tr>
-
-        <tr style="padding-top: 9pt;padding-left: 26pt;text-indent: 0pt;line-height: 178%;text-align: left;">
-            <td width="4%">2.</td><td></td>
-            <td width="48%">-----------------------------------------------------------------</td><td></td>
-            <td width="48%">-----------------------------------------------------------------</td><td></td>
-        </tr>
-
-
-        <tr style="padding-top: 9pt;padding-left: 26pt;text-indent: 0pt;line-height: 178%;text-align: left;">
-            <td width="4%">3.</td><td></td>
-            <td width="48%">-----------------------------------------------------------------</td><td></td>
-            <td width="48%">-----------------------------------------------------------------</td><td></td>
-        </tr>
-
-
-        <tr style="padding-top: 9pt;padding-left: 26pt;text-indent: 0pt;line-height: 178%;text-align: left;">
-            <td width="4%">4.</td><td></td>
-            <td width="48%">-----------------------------------------------------------------</td><td></td>
-            <td width="48%">-----------------------------------------------------------------</td><td></td>
-        </tr>
-
-
-        <tr style="padding-top: 9pt;padding-left: 26pt;text-indent: 0pt;line-height: 178%;text-align: left;">
-            <td width="4%">5.</td><td></td>
-            <td width="48%">-----------------------------------------------------------------</td><td></td>
-            <td width="48%">-----------------------------------------------------------------</td><td></td>
-        </tr>
-
-
-        <tr style="padding-top: 9pt;padding-left: 26pt;text-indent: 0pt;line-height: 178%;text-align: left;">
-            <td width="4%">6.</td><td></td>
-            <td width="48%">-----------------------------------------------------------------</td><td></td>
-            <td width="48%">-----------------------------------------------------------------</td><td></td>
-        </tr>
+        @endforeach
 
     </table>
 
