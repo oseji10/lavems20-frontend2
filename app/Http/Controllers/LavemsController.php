@@ -55,6 +55,7 @@ public function test(Request $request){
     ]);
     $invoice_number = $random_string;
     $clientId = $request->input('client_id');
+    // $created_by = Auth::user()->id;
     $equipmentSerialNumbers = $request->input('equipment_serial_numbers');
     $equipments = $request->input('equipments');
     $quantities = $request->input('quantities');

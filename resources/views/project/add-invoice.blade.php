@@ -104,6 +104,16 @@ $breadcrumbs = ["/"=>"Home","/Interface"=>"Interface","/Interface/Forms"=>"Forms
             <form method="POST" action="{{route('invoice.test')}}">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="client_id" value="{{ $client_id}}">
+                {{-- <input type="text" name="user_id" value="<span id='id'></span>"> --}}
+
+
+
+                {{-- <span>Welcome, <span id="first_name"></span>!</span> --}}
+
+
+
+
+
 
                 <div id="item-container">
                     <div class="item">
@@ -285,4 +295,19 @@ $breadcrumbs = ["/"=>"Home","/Interface"=>"Interface","/Interface/Forms"=>"Forms
 
 </div>
 </div>
+{{-- <label for="first_name">First Name:</label> --}}
+{{-- <input type="text" id="first_name" name="first_name" />
+
+
+<script>
+const user = JSON.parse(sessionStorage.getItem('user'));
+if (user) {
+  const firstName = user.first_name;
+  console.log(firstName); // make sure you see the first name in the console
+  // Set the value of the input field to the first name
+  document.getElementById('first_name').value = firstName;
+} else {
+  window.location.href = '/Pages/Authentication/Login';
+}
+</script> --}}
 @endsection

@@ -32,7 +32,13 @@
 
             <div class="name" style="font-weight:bold; font-size:14pt;">Hi, <span id="first_name"></span> &nbsp;<span id="last_name"></span></div>
         </a>
+        {{-- <span id='user_id'></span> --}}
+        <p id="user_id"> </p>
+        <input type="text" name="user_id"><input/>
         <script src="{{ asset('js/auth2.js') }}"></script>
+
+
+
         <div class="dropdown-menu dropdown-menu-end user-menu wide">
             {{-- <div class="row mb-3 ms-0 me-0">
                 <div class="col-12 ps-1 mb-2">
