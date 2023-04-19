@@ -168,9 +168,9 @@ padding: 5px 5px 5px 5px;
         <tr style="padding-top: 9pt;padding-left: 26pt;text-indent: 0pt;line-height: 178%;text-align: left;">
             <td width="10%"></td>
             {{-- <td></td> --}}
+            <td width="40%">Serial Number of Equipment:</td>
             <td width="40%">List of Equipment on Site:</td>
             {{-- <td></td> --}}
-            <td width="40%">Serial Number of Equipment:</td>
             {{-- <td></td> --}}
         </tr>
 
