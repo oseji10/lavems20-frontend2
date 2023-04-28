@@ -204,6 +204,8 @@
                         {{-- <h2 class="small-title">List of Clients</h2> --}}
                         <div class="card mb-5">
                             <div class="card-body">
+                                <input type="text" id="search-box" placeholder="Search..." class="form-control">
+
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
@@ -244,6 +246,27 @@
                     <!-- Hoverable Rows End -->
 
 
+                    <script>
+                        const searchBox = document.getElementById('search-box');
+                        const tableRows = document.querySelectorAll('tbody tr');
+
+                        searchBox.addEventListener('input', function() {
+                          const searchTerm = searchBox.value.toLowerCase();
+
+                          tableRows.forEach(function(row) {
+                            const invoiceNumber = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                            const clientId = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                            const clientName = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+                            const processedDate = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
+
+                            if (invoiceNumber.includes(searchTerm) || clientId.includes(searchTerm) || clientName.includes(searchTerm) || processedDate.includes(searchTerm)) {
+                              row.style.display = 'table-row';
+                            } else {
+                              row.style.display = 'none';
+                            }
+                          });
+                        });
+                      </script>
 
 
 
