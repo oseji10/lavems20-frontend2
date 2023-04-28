@@ -195,6 +195,8 @@
                     <section class="scroll-section" id="hoverableRows">
                                             <div class="card mb-5">
                                               <div class="card-body">
+                                                <input type="text" id="search-box" placeholder="Search..." class="form-control">
+
                                                 <table class="table table-hover">
                                                   <thead>
                                                     <tr>
@@ -239,6 +241,29 @@
                                           </section>
 
 
+                                          <script>
+                                            const searchBox = document.getElementById('search-box');
+                                            const tableRows = document.querySelectorAll('tbody tr');
+
+                                            searchBox.addEventListener('input', function() {
+                                              const searchTerm = searchBox.value.toLowerCase();
+
+                                              tableRows.forEach(function(row) {
+                                                const invoiceNumber = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                                                const clientId = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                                                const clientName = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+                                                const email = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
+                                                const invoicedBy = row.querySelector('td:nth-child(6)').textContent.toLowerCase();
+                                                const invoiceDate = row.querySelector('td:nth-child(7)').textContent.toLowerCase();
+
+                                                if (invoiceNumber.includes(searchTerm) || clientId.includes(searchTerm) || clientName.includes(searchTerm) || email.includes(searchTerm) || invoicedBy.includes(searchTerm) || invoiceDate.includes(searchTerm)) {
+                                                  row.style.display = 'table-row';
+                                                } else {
+                                                  row.style.display = 'none';
+                                                }
+                                              });
+                                            });
+                                          </script>
 
 
 

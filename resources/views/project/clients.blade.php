@@ -90,7 +90,10 @@ $breadcrumbs = ["/"=>"Home","/Interface"=>"Interface","/Interface/Content"=>"Con
             {{-- <h2 class="small-title">List of Clients</h2> --}}
             <div class="card mb-5">
                 <div class="card-body">
-                    <table class="table table-hover">
+                    <input type="text" id="search-box" placeholder="Search..." class="form-control">
+
+
+                    <table class="table table-hover" id="clientTable">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -104,11 +107,9 @@ $breadcrumbs = ["/"=>"Home","/Interface"=>"Interface","/Interface/Content"=>"Con
                             </tr>
                         </thead>
                         <tbody>
-                            <?php  $i=1; ?>
+                            <?php $i = 1; ?>
+                            @foreach ($clients as $data)
                             <tr>
-
-                                @foreach ($clients as $data)
-
                                 <th scope="row"><?php echo $i++; ?></th>
                                 <td>{{$data['client_id'] ?? null}}</td>
                                 <td>{{$data['name'] ?? null}}</td>
@@ -117,11 +118,12 @@ $breadcrumbs = ["/"=>"Home","/Interface"=>"Interface","/Interface/Content"=>"Con
                                 <td>{{$data['user']['first_name'] ?? null}} {{$data['user']['last_name'] ?? null}}</td>
                                 <td>{{ Carbon\Carbon::parse($data['created_at'])->format('D, d-m-Y ') }}</td>
                                 <td><a href="">Edit</a></td>
-
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
+
+
                 </div>
             </div>
         </section>
@@ -253,6 +255,29 @@ $breadcrumbs = ["/"=>"Home","/Interface"=>"Interface","/Interface/Content"=>"Con
                 </div>
             </div>
         </div>
+        <script>
+            const searchBox = document.getElementById('search-box');
+            const tableRows = document.querySelectorAll('tbody tr');
+
+            searchBox.addEventListener('input', function() {
+              const searchTerm = searchBox.value.toLowerCase();
+
+              tableRows.forEach(function(row) {
+                const clientId = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                const clientName = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+                const phone = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
+                const email = row.querySelector('td:nth-child(5)').textContent.toLowerCase();
+                const registeredBy = row.querySelector('td:nth-child(6)').textContent.toLowerCase();
+                const registrationDate = row.querySelector('td:nth-child(7)').textContent.toLowerCase();
+
+                if (clientId.includes(searchTerm) || clientName.includes(searchTerm) || phone.includes(searchTerm) || email.includes(searchTerm) || registeredBy.includes(searchTerm) || registrationDate.includes(searchTerm)) {
+                  row.style.display = 'table-row';
+                } else {
+                  row.style.display = 'none';
+                }
+              });
+            });
+          </script>
 
         <!-- Scrollspy End -->
     </div>
