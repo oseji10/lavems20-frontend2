@@ -59,17 +59,7 @@
         <th>&nbsp;&nbsp;Unit Price</th>
         <th>&nbsp;&nbsp;Total</th>
     </tr>
-    {{-- @foreach(json_decode($data) as $item)
-    <tr>
-        <td><?php  echo $i++; ?></td>
-        <td>{{ $item->equipment_serial_number ?? null}}</td>
-        <td>{{ $item->equipment ?? null}}</td>
-        <td>{{ $item->quantity ?? null}}</td>
-        <td>N{{ number_format($item->cost ?? null, 2) }}</td>
-        <td>N{{ number_format($item->cost ?? null*$item->quantity ?? null, 2) }}</td>
-    </tr>
 
-@endforeach --}}
 
 @foreach ($data['invoice'] as $item)
     <tr>
@@ -80,7 +70,7 @@
         <td>{{ $item['quantity'] }}</td>
         <td>{{ number_format($item['cost'], 2) }}</td>
         <td>{{ number_format($item['cost']*$item['quantity'], 2) }}</td>
-        {{-- <td>{{ $item['name'] }}</td> --}}
+
 
 
     </tr>
@@ -90,7 +80,7 @@
     <td colspan="4"></td>
     <td style="color: red;">Total</td>
     <td>{{ number_format($data['grand_total'], 2) }}</td>
-    {{-- <td style="color: red;">N{{ number_format($item->cost ?? null *$item->quantity ?? null, 2) }}</td> --}}
+
 </tr>
 </table>
 
