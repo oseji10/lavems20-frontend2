@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://lavems.littlefingers.ng/';
+const API_BASE_URL = 'https://lavems.littlefingers.ng/';
 
 const form = document.getElementById('login-form');
 
