@@ -99,7 +99,7 @@ padding: 5px 5px 5px 5px;
     <p style="text-indent: 0pt;text-align: left"><span>
             <table border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td><img width="173" height="88" src='https://lavems2.littlefingers.ng/NIRSAL-MFB.jpeg' /></td>
+                    <td><img width="173" height="88" src='https://lavems2.littlefingers.ng/img/NIRSAL-MFB.jpeg' /></td>
                 </tr>
             </table>
         </span></p>
@@ -269,7 +269,7 @@ padding: 5px 5px 5px 5px;
     <table style="width:100%; border:1px;">
         <tr>
             <td width="50%">_________________________________</td>
-            <td><b><u>Orkuma Hembe </u></b> <img width="56" height="50" src="https://littlefingers.ng/img/okuma.jpeg" />
+            <td><b><u>Orkuma Hembe </u></b> <img width="56" height="50" src="https://lavems2.littlefingers.ng/img/okuma.jpeg" />
             </td>
             {{-- <td>TEAM LEAD's NAME &amp; SIGNATURE</td><td>VENDOR's NAME &amp; SIGNATURE  </td> --}}
         </tr>

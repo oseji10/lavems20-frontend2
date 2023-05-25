@@ -10,7 +10,7 @@
     border-color: black;">
 	<table width="100%" border="0">
     <tr>
-        <td style="text-align:right" width="60%"><img src="https://littlefingers.ng/lavems.jpeg" width="130px"  height="130px"></td>
+        <td style="text-align:right" width="60%"><img src="https://lavems2.littlefingers.ng/img/lavems.jpeg" width="130px"  height="130px"></td>
       <td style="text-align:right">Office Suite: Suite 309 DBM Plaza, Wuse 2, Abuja<br/>Tel: 08036576494, 0987675589<br/>Email: littlefingers@rocketmail.com, info@littlefingers.com<br/></td>
 </tr>
 <tr>
@@ -172,7 +172,7 @@ $get_amount=$class_obj->convert_number($data['grand_total']);
         <td colspan='2' style='text-align:center; font-weight:bold; font-size:16px'>Bank Account Name: Little Fingers Integrated<br/>Bank: NIRSAL MFB<br/>Account number: 0250265614<br/></td>
     </tr>
     <tr>
-        <td colspan="2" style='text-align:center' width="40%"><br/><img src="https://littlefingers.ng/okuma.jpeg" width="100px" height="100px"/><hr style='border-bottom:dotted' width="200px"/></td>
+        <td colspan="2" style='text-align:center' width="40%"><br/><img src="https://lavems2.littlefingers.ng/img/okuma.jpeg" width="100px" height="100px"/><hr style='border-bottom:dotted' width="200px"/></td>
 
     </tr>
     <tr>
