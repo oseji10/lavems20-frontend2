@@ -10,7 +10,7 @@
     border-color: black;">
 	<table width="100%" border="0">
     <tr>
-        <td style="text-align:right" width="60%"><img src="https://lavems2.littlefingers.ng/img/lavems.jpeg" width="130px"  height="130px"></td>
+        <td style="text-align:right" width="60%"><img src="https://lavems2.littlefingers.ng/img/lavems.jpg" width="130px"  height="130px"></td>
       <td style="text-align:right">Office Suite: Suite 309 DBM Plaza, Wuse 2, Abuja<br/>Tel: 08036576494, 0987675589<br/>Email: littlefingers@rocketmail.com, info@littlefingers.com<br/></td>
 </tr>
 <tr>
